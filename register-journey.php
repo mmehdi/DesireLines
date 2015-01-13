@@ -15,17 +15,17 @@
     <div class="panel-heading">Journey Details</div>
    
   <div class="panel-body">
-    <form class="form-horizontal" role="form" id="tab-general-form">
+    <form class="form-horizontal" role="form" id="journey-form">
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going from</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="" placeholder="origin"> 
+          <input type="text" class="form-control" id="going-from" placeholder="origin"> 
         </div>
       </div>
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going to</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="" placeholder="destination">                 
+          <input type="text" class="form-control" id="going-to" placeholder="destination">                 
         </div>
       </div>
       <div class="form-group">
@@ -171,10 +171,10 @@
         <label  class="col-sm-4 control-label">Is there a return journey?</label>
         <div class="col-sm-8">
           <label class="radio-inline">
-            <input name="returnJourneyRadio" id="yes" value="yes" type="radio"/> Yes
+            <input name="returnJourneyRadio" id="yes" value=1 type="radio"/> Yes
           </label>
           <label class="radio-inline">
-            <input name="returnJourneyRadio" id="no" value="no" type="radio" checked/> No
+            <input name="returnJourneyRadio" id="no" value=0 type="radio" checked/> No
           </label>
         </div>
       </div>
@@ -184,6 +184,8 @@
     </div>      <!--div class="panel-body"-->
 
   </div>     <!--div class="panel panel-info"-->
+
+<?php include('return-journey.php');?>
 
 </div> <!--<div class="row col-xs-12 col-sm-12 col-lg-10 col-md-12"-->
 
@@ -243,14 +245,14 @@ $('#leave_time').datetimepicker({
       var zk = inputsWrapper.length; //initlal text box count
 
       var bus_div = '<label class="col-sm-6 control-label">Bus #</label><div class="col-sm-4"><select class="form-control" id=""><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>11</option><option>12</option><option>13</option><option>15</option><option>16B</option><option>17/17A/18</option><option>19</option><option>20</option><option>21B</option><option>23</option><option>27</option><option>62</option><option>419</option><option>N1</option><option>N17</option><option>N19</option><option>N20</option><option>N21</option><option>N23</option><option>X40</option>X40</select></div>'; 
-      var bus_alt_div='<div class="form-group out-bus-change-alt-'+count+'""></div>'
+      var bus_alt_div='<div class="form-group out-bus-change-alt-'+count+'"></div>'
       var alt_button_div = bus_alt_div+'<div class="form-group col-sm-12 col-lg-12 out-bus label control-label"></label><div class="col-sm-4 col-lg-4"><button type="button" class="btn btn-xs btn-primary out-bus-change-alt" id="add-alternate-bus" style="margin-bottom: 5px;" data-name="out-bus-change-alt-'+count+'" onClick="add_alt_button_click(this);">Add Alternate Bus</button></div></div>';
 
         if(zk <= maxInputs) //max input box allowed
         {
             fieldCount++; //text box added increment
             //add input box
-            $(inputsWrapper).append('<div class="form-group col-sm-8">Bus Change '+count+bus_div+alt_button_div+'</div><a href="#" id="removeclass5" name="'+form_class+'" class="removeclass5">&times;</a></div>');
+            $(inputsWrapper).append('<div class="dynamic-bus-leg-form col-sm-8" id="">Bus Change '+count+bus_div+alt_button_div+'<div class="col-sm-12 col-lg-12"><a href="#" id="removeclass5" name="'+form_class+'" class="removeclass5">&times;</a></div></div>');
             zk++; //text box increment
         }
 
@@ -262,10 +264,15 @@ $('#leave_time').datetimepicker({
         var form_class = $(this).attr('name'); //the button name is div id. e.g "out-bus-alt"
         //alert('trying to remove');
         var inputsWrapper  = $("form ."+form_class); //Input boxes wrapper ID
+
         //user click on remove text
         var zk = inputsWrapper.length; //initlal text box count
         if( zk >= 1 ) {
+               // alert(form_class);
+               //alert($(this).parent().parent().attr('class'));
                 $(this).parent('div.dynamic-bus-form').remove(); //remove text box
+                $(this).parent().parent('div.dynamic-bus-leg-form').remove(); //remove text box
+                //$(this).parent().parent('div.out-bus-change').remove(); //remove text box
                 zk--; //decrement textbox
         }
         return false;
@@ -296,5 +303,17 @@ $('#select-days').hide();
             $('#select-days').show(); 
         } 
     });
+
+  //$("#returnJourneyRadio").change();
+
+    $("input[name$='returnJourneyRadio']").click(function() {
+        var radioVal = $(this).val();
+        if(radioVal==1) {
+          $('#return-journey').fadeIn('slow');
+        } else {
+          $('#return-journey').fadeOut('slow');
+        } 
+    });
+
 
 </script>
