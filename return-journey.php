@@ -6,13 +6,13 @@
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going from</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="ret-going-from" placeholder="origin"> 
+          <input type="text" class="form-control" id="ret-going-from" placeholder="origin - bus stop name"> 
         </div>
       </div>
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going to</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="ret-going-to" placeholder="destination">                 
+          <input type="text" class="form-control" id="ret-going-to" placeholder="destination - bus stop name">                 
         </div>
       </div>
       <div class="form-group">
@@ -60,7 +60,7 @@
       <div class="form-group col-sm-12 col-lg-12">
         <label class="col-sm-4 control-label"></label>
         <div class="col-sm-4 col-lg-4">
-          <button type="button" class="btn btn-xs btn-primary" id="add-alternate-bus" style="margin-bottom: 5px;" data-name="ret-out-bus-alt" onClick="add_alt_button_click(this);">Add Alternate Bus</button>
+          <button type="button" class="btn btn-xs btn-primary" id="add-alternate-bus" style="margin-bottom: 5px;" data-name="ret-out-bus-alt" onClick="add_alt_button_click(this);">Add Alternative Bus</button>
         </div>
       </div>
 
@@ -85,7 +85,7 @@
       <div class="form-group col-sm-12" style="">
         <label class="col-sm-4 control-label"></label>
         <div class="col-sm-4 col-lg-4">
-          <button type="button" class="btn btn-xs btn-primary" id="add-bus-change" style="display: none;" name="ret-out-bus-change">Add Bus Change</button>
+          <button type="button" class="btn btn-xs btn-primary" id="add-bus-change" style="display: none;" name="ret-out-bus-change">Add Bus Leg</button>
         </div>
       </div>
 
