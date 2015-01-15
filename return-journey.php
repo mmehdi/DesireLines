@@ -18,74 +18,131 @@
       <div class="form-group">
         <label  class="col-sm-4 control-label">I start return journey at</label>
         <div class="col-sm-2">
-          <input type='text' class="form-control" name="ret-leave-time" id="ret-leave-time" data-date-format="HH:mm" placeholder="Time" value=""/>
+          <input type='text' class="form-control" name="ret-leave-time" id="ret-leave-time" data-date-format="HH:mm" placeholder="time" value=""/>
         </div>
       </div>
-      <div class="form-group col-sm-8" id="ret-out-bus">
-        <label class="col-sm-6 control-label">Bus #</label>
-        <div class="col-sm-4">
-          <select class="form-control" id="">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>11</option>
-            <option>12</option>
-            <option>13</option>
-            <option>15</option>
-            <option>16B</option>
-            <option>17/17A/18</option>
-            <option>19</option>
-            <option>20</option>
-            <option>21B</option>
-            <option>23</option>
-            <option>27</option>
-            <option>62</option>
-            <option>419</option>
-            <option>N1</option>
-            <option>N17</option>
-            <option>N19</option>
-            <option>N20</option>
-            <option>N21</option>
-            <option>N23</option>
-            <option>X40</option>X40  
+        <div class="form-group">
+        <label  class="col-sm-4 control-label">I arrive at</label>
+        <div class="col-sm-2">
+          <input type='text' class="form-control" name="ret-arrive-time" id="ret-arrive-time" data-date-format="HH:mm" placeholder="time" value=""/>
+        </div>
+      </div>
+     
+      <div class="form-group">
+        <label  class="col-sm-4 control-label">I want to start receiving updates</label>
+         <div class="col-sm-8">
+            <select class="form-control" id="ret-alert-time">
+              <option value="0" >From start of the journey</option>
+              <option value="10" >10 minutes earlier</option>
+              <option value="20" >20 minutes earlier</option>
+              <option value="30" >30 minutes earlier</option>                        
+              <option value="40" >40 minutes earlier</option>
+              <option value="50" >50 minutes earlier</option>
+              <option value="60" >An hour earlier</option>            
+            </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-sm-4 control-label">How many buses do you use?</label>
+        <div class="col-sm-2">
+          <select class="form-control" id="ret-no-of-buses">
+            <option>Select</option>
+            <option value='1'>1</option>
+            <option value='2'>2</option>
           </select>
         </div>
       </div>
 
-      <div class="form-group ret-out-bus-alt col-sm-8"> <!--todo-->
-      </div>
+     <div id="ret-bus-1"> <!--out-bus-1, out-bus-route-1, out-bus-route-1-alt-->
+        <div class="form-group col-sm-8 ret-bus-route-1">
+          <label class="col-sm-6 control-label">Bus route #</label>
+          <div class="col-sm-4">
+            <select class="form-control" id="ret-bus-route-1">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="15">15</option>
+              <option value="16B">16B</option>
+              <option value="17/17A/18">17/17A/18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21B">21B</option>
+              <option value="23">23</option>
+              <option value="27">27</option>
+              <option value="62">62</option>
+              <option value="419">419</option>
+              <option value="X40">X40</option>  
+            </select>
+          </div>
+        </div>
 
-      <div class="form-group col-sm-12 col-lg-12">
-        <label class="col-sm-4 control-label"></label>
-        <div class="col-sm-4 col-lg-4">
-          <button type="button" class="btn btn-xs btn-primary" id="add-alternate-bus" style="margin-bottom: 5px;" data-name="ret-out-bus-alt" onClick="add_alt_button_click(this);">Add Alternative Bus</button>
+        <div class="form-group ret-bus-route-1-alt col-sm-8"> <!--todo-->
+        </div>
+
+        <div class="form-group col-sm-12 col-lg-12">
+          <label class="col-sm-4 control-label"></label>
+          <div class="col-sm-4 col-lg-4">
+            <button type="button" class="btn btn-xs btn-primary" id="add-alternate-bus" style="margin-bottom: 5px;" data-name="ret-bus-route-1-alt" onClick="add_alt_button_click(this);">Add Alternative Bus</button>
+          </div>
         </div>
       </div>
 
 
-
-
-      <div class="form-group">
-        <label class="col-sm-4 control-label">Do you change buses?</label>
-        <div class="col-sm-8">
-          <label class="radio-inline">
-            <input name="retChangeBusRadio" id="yes" value=1 type="radio"/> Yes
-          </label>
-          <label class="radio-inline">
-            <input name="retChangeBusRadio" id="no" value=0 type="radio" checked > No
-          </label>
+      <div id="ret-bus-2">
+        <div class="form-group">
+          <label  class="col-sm-4 control-label">Where do you get off from the first bus?</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="ret-bus-2-from" placeholder="bus stop name"> 
+          </div>
         </div>
-      </div>
+        <div class="form-group">
+          <label  class="col-sm-4 control-label">From where do you take the next bus?</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="ret-bus-2-to" placeholder="bus stop name">                 
+          </div>
+        </div>
 
-      <div class="form-group out-bus-change" id="ret-out-bus-change" style="display: none;">
-      </div>
+        <div class="form-group col-sm-8 ret-bus-route-2">
+          <label class="col-sm-6 control-label">Bus route #</label>
+          <div class="col-sm-4">
+            <select class="form-control" id="ret-bus-route-2">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="15">15</option>
+              <option value="16B">16B</option>
+              <option value="17/17A/18">17/17A/18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21B">21B</option>
+              <option value="23">23</option>
+              <option value="27">27</option>
+              <option value="62">62</option>
+              <option value="419">419</option>
+              <option value="X40">X40</option>  
+            </select>
+          </div>
+        </div>
 
-      <div class="form-group col-sm-12" style="">
-        <label class="col-sm-4 control-label"></label>
-        <div class="col-sm-4 col-lg-4">
-          <button type="button" class="btn btn-xs btn-primary" id="add-bus-change" style="display: none;" name="ret-out-bus-change">Add Bus Leg</button>
+        <div class="form-group ret-bus-route-2-alt col-sm-8"> <!--todo-->
+        </div>
+
+        <div class="form-group col-sm-12 col-lg-12">
+          <label class="col-sm-4 control-label"></label>
+          <div class="col-sm-4 col-lg-4">
+            <button type="button" class="btn btn-xs btn-primary" id="add-alternate-bus" style="margin-bottom: 5px;" data-name="ret-bus-route-2-alt" onClick="add_alt_button_click(this);">Add Alternative Bus</button>
+          </div>
         </div>
       </div>
 
