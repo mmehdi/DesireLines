@@ -12,6 +12,14 @@
 	$page = substr(end($exploded),0,-4);
 
 
+/*	if(isset($_SESSION['status']) && $_SESSION['status']=='verified'){
+					header('Location: index.php');
+	}
+
+	else{
+			header('Location: login.php');
+			die();
+	}*/
 	//Check if the current page is an exception and if a user is already stored in the session:
 	/*if( in_array($page, $exceptions) === false){
 		if (isset($_SESSION['account']) === false){
@@ -31,6 +39,11 @@
 	
 	define("DB_CONNECTION","host=localhost port=5432 dbname=tweetdesk user=postgres password=5L1ght1y");
 
+	//twitter constants
+	define('CONSUMER_KEY', 'Pi5D2ADuRWW1HnG3DvjsWEJuV');
+	define('CONSUMER_SECRET', 'rJHFjopPrbXYjLKOIUmjzyDwbuRbL1Blei9fV8zbfnCo8uyQU0');
+	define('OAUTH_CALLBACK', 'http://localhost:8888/DesireLines/twitter-callback.php');
+
 	//Deployment mode:
 	//define("APIURL","http://localhost:8080/smile-server/api-1.1");
 
@@ -38,6 +51,7 @@
 	include dirname(__FILE__)."/inc/rest.inc.php";
 	include dirname(__FILE__)."/inc/dynamic-form.inc.php";
 	include dirname(__FILE__)."/inc/db-connector.inc.php";
+
 
 	// include dirname(__FILE__)."/inc/user.inc.php";
 ?>
