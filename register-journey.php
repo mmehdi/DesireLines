@@ -5,9 +5,16 @@
   header('Location: login.php');
   die();
 }
+  include('header.php');
 
-include('header.php');
 
+/*if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+  var_dump($_POST);
+  die();
+   /*foreach ($_POST['name'] as $key => $value) {
+        $_POST['name'][$key]; // make something with it
+        $_POST['example'][$key];  // it will get the same index $key
+        */
 ?>
 <div id="page-wrapper">
   <div class="row">
@@ -27,35 +34,41 @@ include('header.php');
     <div class="panel-heading">Journey details</div>
    
   <div class="panel-body">
-    <form class="form-horizontal" role="form" id="journey-form">
+    <form class="form-horizontal" method="post" role="form" id="journey-form" class="myForms" action="">
+      <div class="form-group">
+        <label  class="col-sm-4 control-label">Your twitter handle</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" id="twitter-handle" name="twitter-handle" placeholder="e.g commuting to work" readonly value="<?php echo $_SESSION['request_vars']['screen_name'];?>">
+           </div>
+      </div>
       <div class="form-group">
         <label  class="col-sm-4 control-label">Name this journey</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="journey-name" placeholder="e.g commuting to work"> 
+          <input type="text" class="form-control" id="journey-name" name="journey-name" placeholder="e.g commuting to work"> 
         </div>
       </div>
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going from</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="going-from" placeholder="origin - bus stop name"> 
+          <input type="text" class="form-control" id="going-from" name="going-from" placeholder="origin - bus stop name"> 
         </div>
       </div>
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going to</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="going-to" placeholder="destination - bus stop name">                 
+          <input type="text" class="form-control" id="going-to" name="going-to" placeholder="destination - bus stop name">                 
         </div>
       </div>
       <div class="form-group" id='select-days'>
         <label  class="col-sm-4 control-label">Days of tavel</label>
         <div class="col-sm-8">
-          <label class="checkbox-inline"><input type="checkbox" name="monday-checkbox" id="monday-checkbox" value="1">Mon</label>
-          <label class="checkbox-inline"><input type="checkbox" name="monday-checkbox" id="monday-checkbox" value="1">Tue</label>
-          <label class="checkbox-inline"><input type="checkbox" name="monday-checkbox" id="monday-checkbox" value="1">Wed</label>
-          <label class="checkbox-inline"><input type="checkbox" name="monday-checkbox" id="monday-checkbox" value="1">Thu</label>
-          <label class="checkbox-inline"><input type="checkbox" name="monday-checkbox" id="monday-checkbox" value="1">Fri</label>
-          <label class="checkbox-inline"><input type="checkbox" name="monday-checkbox" id="monday-checkbox" value="1">Sat</label>
-          <label class="checkbox-inline"><input type="checkbox" name="monday-checkbox" id="monday-checkbox" value="1">Sun</label>
+          <label class="checkbox-inline"><input type="checkbox" name="days-checkbox" id="days-checkbox" value="monday">Mon</label>
+          <label class="checkbox-inline"><input type="checkbox" name="days-checkbox" id="days-checkbox" value="tuesday">Tue</label>
+          <label class="checkbox-inline"><input type="checkbox" name="days-checkbox" id="days-checkbox" value="wednesday">Wed</label>
+          <label class="checkbox-inline"><input type="checkbox" name="days-checkbox" id="days-checkbox" value="thursday">Thu</label>
+          <label class="checkbox-inline"><input type="checkbox" name="days-checkbox" id="days-checkbox" value="friday">Fri</label>
+          <label class="checkbox-inline"><input type="checkbox" name="days-checkbox" id="days-checkbox" value="saturday">Sat</label>
+          <label class="checkbox-inline"><input type="checkbox" name="days-checkbox" id="days-checkbox" value="sunday">Sun</label>
          </div>
       </div>
       <div class="form-group">
@@ -73,7 +86,7 @@ include('header.php');
       <div class="form-group">
         <label  class="col-sm-4 control-label">I want to start receiving updates</label>
          <div class="col-sm-6">
-            <select class="form-control" id="out-alert-time">
+            <select class="form-control" id="out-alert-time" name="out-alert-time">
               <option value=0 >From start of the journey</option>
               <option value=10 >10 minutes earlier</option>
               <option value=20 >20 minutes earlier</option>
@@ -88,19 +101,19 @@ include('header.php');
       <div class="form-group">
         <label class="col-sm-4 control-label">Purpose of journey</label>
         <div class="col-sm-4">
-          <select class="form-control" id="journey-purpose">
-            <option>Commuting</option>
-            <option>Leisure</option>
-            <option>School run</option>
-            <option>Business Trip</option>
+          <select class="form-control" id="journey-purpose" name="journey-purpose">
+            <option value = "commuting">Commuting</option>
+            <option value = "leisure">Leisure</option>
+            <option value = "school">School run</option>
+            <option value = "business">Business Trip</option>
           </select>
         </div>
       </div>
        <div class="form-group">
         <label class="col-sm-4 control-label">How many buses do you use?</label>
         <div class="col-sm-2">
-          <select class="form-control" id="out-no-of-buses">
-            <option>Select</option>
+          <select class="form-control" id="out-no-of-buses" name="out-no-of-buses">
+            <option value=0>Select</option>
             <option value=1>1</option>
             <option value=2>2</option>
           </select>
@@ -111,7 +124,7 @@ include('header.php');
         <div class="form-group col-sm-8 out-bus-route-1" >
           <label class="col-sm-6 control-label">Bus route # (FirstAberdeen)</label>
           <div class="col-sm-4">
-            <select class="form-control" id="out-bus-route-1">
+            <select class="form-control" id="out-bus-route-1" name="out-bus-route-1">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -151,20 +164,20 @@ include('header.php');
         <div class="form-group">
           <label  class="col-sm-4 control-label">Where do you get off from the first bus?</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="out-bus-2-from" placeholder="bus stop name"> 
+            <input type="text" class="form-control" id="out-bus-2-from" name="out-bus-2-from" placeholder="bus stop name"> 
           </div>
         </div>
         <div class="form-group">
           <label  class="col-sm-4 control-label">From where do you take the next bus?</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="out-bus-2-to" placeholder="bus stop name">                 
+            <input type="text" class="form-control" id="out-bus-2-to" name="out-bus-2-to" placeholder="bus stop name">                 
           </div>
         </div>
 
         <div class="form-group col-sm-8">
           <label class="col-sm-6 control-label">Bus route # (FirstAberdeen)</label>
           <div class="col-sm-4">
-            <select class="form-control" id="out-bus-route-2">
+            <select class="form-control" id="out-bus-route-2" name="out-bus-route-2">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -219,16 +232,14 @@ include('header.php');
 
 <?php include('return-journey.php');?>
 
-      <button type="submit" class="btn btn-default col-md-offset-4">Cancel</button>
-      <button type="submit" class="btn btn-success">Save</button>
+      <button type="button" class="btn btn-default col-md-offset-4">Cancel</button>
+      <button type="button" class="btn btn-success" id="saveForms">Save</button>
 
 </div> <!--<div class="row col-xs-12 col-sm-12 col-lg-10 col-md-12"-->
 
 <?php include('footer.php');?>
 
 <script type="text/javascript">
-
-
 
 $('#leave-time').datetimepicker({
   pickDate: false
@@ -395,5 +406,34 @@ $('#arrive-time').datetimepicker({
       $('.ret-bus-route-'+route+'-alt').append('<div class="dynamic-bus-form" id="">'+bus_div+'<a href="#" id="removeclass5" name="ret-bus-route-'+route+'-alt" class="removeclass5">&times;</a></div>');
       $('#ret-bus-route-alt-'+id).val(alt_bus);
       });
+    }
+
+
+    $("#saveForms").click(function () {
+      submitForms();
+      //$(".myForms").submit(); // should show 3 alerts (one for each form submission
+  });
+
+    $(".myForms").submit(function () {
+            alert('hi');
+      console.log("aaaaa");
+    return true;
+  });
+
+    function submitForms(){
+      var datastring = $("#journey-form,#return-journey-form").serialize();
+      $.ajax({
+            type: "POST",
+            url: "process-forms.php",
+            data: datastring,
+            dataType: "json",
+            success: function(data) {
+                //var obj = jQuery.parseJSON(data); if the dataType is not specified as json uncomment this
+                // do what ever you want with the server response
+            },
+            error: function(){
+                  alert('something went wrong!');
+            }
+        });
     }
 </script>

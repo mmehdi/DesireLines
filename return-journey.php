@@ -2,17 +2,17 @@
     <div class="panel-heading">Return Journey</div>
    
   <div class="panel-body">
-    <form class="form-horizontal" role="form" id="return-journey-form">
+    <form class="form-horizontal" method="post" role="form" id="return-journey-form" class="myForms" action="">
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going from</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="ret-going-from" placeholder="origin - bus stop name"> 
+          <input type="text" class="form-control" id="ret-going-from" name="ret-going-from" placeholder="origin - bus stop name"> 
         </div>
       </div>
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going to</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="ret-going-to" placeholder="destination - bus stop name">                 
+          <input type="text" class="form-control" id="ret-going-to" name="ret-going-to" placeholder="destination - bus stop name">                 
         </div>
       </div>
       <div class="form-group">
@@ -31,7 +31,7 @@
       <div class="form-group">
         <label  class="col-sm-4 control-label">I want to start receiving updates</label>
          <div class="col-sm-6">
-            <select class="form-control" id="ret-alert-time">
+            <select class="form-control" id="ret-alert-time" name="ret-alert-time">
               <option value="0" >From start of the journey</option>
               <option value="10" >10 minutes earlier</option>
               <option value="20" >20 minutes earlier</option>
@@ -46,8 +46,8 @@
       <div class="form-group">
         <label class="col-sm-4 control-label">How many buses do you use?</label>
         <div class="col-sm-2">
-          <select class="form-control" id="ret-no-of-buses">
-            <option>Select</option>
+          <select class="form-control" id="ret-no-of-buses" name="ret-no-of-buses">
+            <option value='0'>Select</option>
             <option value='1'>1</option>
             <option value='2'>2</option>
           </select>
@@ -58,7 +58,7 @@
         <div class="form-group col-sm-8 ret-bus-route-1">
           <label class="col-sm-6 control-label">Bus route # (FirstAberdeen)</label>
           <div class="col-sm-4">
-            <select class="form-control" id="ret-bus-route-1">
+            <select class="form-control" id="ret-bus-route-1" name="ret-bus-route-1">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -98,20 +98,20 @@
         <div class="form-group">
           <label  class="col-sm-4 control-label">Where do you get off from the first bus?</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="ret-bus-2-from" placeholder="bus stop name"> 
+            <input type="text" class="form-control" id="ret-bus-2-from" name="ret-bus-2-from" placeholder="bus stop name"> 
           </div>
         </div>
         <div class="form-group">
           <label  class="col-sm-4 control-label">From where do you take the next bus?</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="ret-bus-2-to" placeholder="bus stop name">                 
+            <input type="text" class="form-control" id="ret-bus-2-to" name="ret-bus-2-to" placeholder="bus stop name">                 
           </div>
         </div>
 
         <div class="form-group col-sm-8 ret-bus-route-2">
           <label class="col-sm-6 control-label">Bus route # (FirstAberdeen)</label>
           <div class="col-sm-4">
-            <select class="form-control" id="ret-bus-route-2">
+            <select class="form-control" id="ret-bus-route-2" name="ret-bus-route-2">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
