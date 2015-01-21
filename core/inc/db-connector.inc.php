@@ -19,7 +19,7 @@
 	function db_fetch($query){
 
 	$db = get_db();
-	echo "<br/><br/>query in db_fetch: ".$query;
+	//echo "<br/><br/>query in db_fetch: ".$query;
 	//exit();
 
 	$result = pg_exec($db, $query);

@@ -2,7 +2,7 @@
     <div class="panel-heading">Return Journey</div>
    
   <div class="panel-body">
-    <form class="form-horizontal" method="post" role="form" id="return-journey-form" class="myForms" action="">
+    <!--form class="form-horizontal" method="post" role="form" id="return-journey-form" class="myForms" action=""-->
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going from</label>
         <div class="col-sm-6">
@@ -146,7 +146,7 @@
         </div>
       </div>
 
-    </form>
+    <!--/form-->
 
     </div>      <!--div class="panel-body"-->
 

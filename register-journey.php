@@ -22,19 +22,19 @@
       <h1 class="page-header">Register a journey</h1>
   </div>
   <!-- /.col-lg-12 -->
-</div>
+  </div>
 
 
 <div class="row col-xs-12 col-sm-12 col-lg-12 col-md-12">
 
 <div class="alert alert-success" role="alert">Welcome <?php echo '<strong>'.$_SESSION['request_vars']['screen_name'].'!</strong>';?></div>
 
+<form class="form-horizontal" role="form" id="journey-form" class="myForms" action="">
     
   <div class="panel panel-info">
     <div class="panel-heading">Journey details</div>
    
   <div class="panel-body">
-    <form class="form-horizontal" method="post" role="form" id="journey-form" class="myForms" action="">
       <div class="form-group">
         <label  class="col-sm-4 control-label">Your twitter handle</label>
         <div class="col-sm-6">
@@ -62,13 +62,13 @@
       <div class="form-group" id='select-days'>
         <label  class="col-sm-4 control-label">Days of tavel</label>
         <div class="col-sm-8">
-          <label class="checkbox-inline"><input type="checkbox" name="days-checkbox" id="days-checkbox" value="monday">Mon</label>
-          <label class="checkbox-inline"><input type="checkbox" name="days-checkbox" id="days-checkbox" value="tuesday">Tue</label>
-          <label class="checkbox-inline"><input type="checkbox" name="days-checkbox" id="days-checkbox" value="wednesday">Wed</label>
-          <label class="checkbox-inline"><input type="checkbox" name="days-checkbox" id="days-checkbox" value="thursday">Thu</label>
-          <label class="checkbox-inline"><input type="checkbox" name="days-checkbox" id="days-checkbox" value="friday">Fri</label>
-          <label class="checkbox-inline"><input type="checkbox" name="days-checkbox" id="days-checkbox" value="saturday">Sat</label>
-          <label class="checkbox-inline"><input type="checkbox" name="days-checkbox" id="days-checkbox" value="sunday">Sun</label>
+          <label class="checkbox-inline"><input type="checkbox" name="days-checkbox[]" id="days-checkbox" value="monday">Mon</label>
+          <label class="checkbox-inline"><input type="checkbox" name="days-checkbox[]" id="days-checkbox" value="tuesday">Tue</label>
+          <label class="checkbox-inline"><input type="checkbox" name="days-checkbox[]" id="days-checkbox" value="wednesday">Wed</label>
+          <label class="checkbox-inline"><input type="checkbox" name="days-checkbox[]" id="days-checkbox" value="thursday">Thu</label>
+          <label class="checkbox-inline"><input type="checkbox" name="days-checkbox[]" id="days-checkbox" value="friday">Fri</label>
+          <label class="checkbox-inline"><input type="checkbox" name="days-checkbox[]" id="days-checkbox" value="saturday">Sat</label>
+          <label class="checkbox-inline"><input type="checkbox" name="days-checkbox[]" id="days-checkbox" value="sunday">Sun</label>
          </div>
       </div>
       <div class="form-group">
@@ -112,10 +112,10 @@
        <div class="form-group">
         <label class="col-sm-4 control-label">How many buses do you use?</label>
         <div class="col-sm-2">
-          <select class="form-control" id="out-no-of-buses" name="out-no-of-buses">
-            <option value=0>Select</option>
-            <option value=1>1</option>
-            <option value=2>2</option>
+          <select class="form-control" id="out-no-of-buses" name="out-no-of-buses" required>
+            <option value="">Select</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
           </select>
         </div>
       </div>
@@ -224,7 +224,7 @@
         </div>
       </div>
 
-    </form>
+    <!--/form-->
 
     </div>      <!--div class="panel-body"-->
 
@@ -233,8 +233,8 @@
 <?php include('return-journey.php');?>
 
       <button type="button" class="btn btn-default col-md-offset-4">Cancel</button>
-      <button type="button" class="btn btn-success" id="saveForms">Save</button>
-
+      <button type="submit" class="btn btn-success" id="saveForms" form="journey-form">Save</button>
+</form>
 </div> <!--<div class="row col-xs-12 col-sm-12 col-lg-10 col-md-12"-->
 
 <?php include('footer.php');?>
@@ -248,6 +248,15 @@ $('#leave-time').datetimepicker({
 $('#arrive-time').datetimepicker({
   pickDate: false
 });
+
+$('#ret-leave-time').datetimepicker({
+  pickDate: false
+});
+
+$('#ret-arrive-time').datetimepicker({
+  pickDate: false
+});
+
 
 
 //add alternate buses
@@ -265,7 +274,7 @@ $('#arrive-time').datetimepicker({
        // var addButton       = $("#add-keyword"); //Add button ID
       var count = $("form ."+form_class+" > div").length+1;
       var zk = inputsWrapper.length; //initlal text box count
-      var bus_div = '<label class="col-sm-6 control-label alt-title">Alternative bus</label><div class="col-sm-4"><select class="form-control" id=""><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="15">15</option><option value="16B">16B</option><option value="17/17A/18">17/17A/18</option><option value="19">19</option><option value="20">20</option><option value="21B">21B</option><option value="23">23</option><option value="27">27</option><option value="62">62</option><option value="419">419</option><option value="X40">X40</option></select></div>'; 
+      var bus_div = '<label class="col-sm-6 control-label alt-title">Alternative bus</label><div class="col-sm-4"><select class="form-control" id="" name="'+form_class+'[]"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="15">15</option><option value="16B">16B</option><option value="17/17A/18">17/17A/18</option><option value="19">19</option><option value="20">20</option><option value="21B">21B</option><option value="23">23</option><option value="27">27</option><option value="62">62</option><option value="419">419</option><option value="X40">X40</option></select></div>'; 
       //var alt_div_title= '<label class="col-sm-12 col-sm-offset-4">Alt Bus '+count+'</label>'
       if(zk <= maxInputs) //max input box allowed
         {
@@ -366,8 +375,9 @@ $('#arrive-time').datetimepicker({
       set_ret_journey_buses(no_of_buses);
     }
 
+//reverse the outbound journey
     function set_ret_journey_buses(no_of_buses){
-      if(no_of_buses==2){
+      if(no_of_buses=='2'){
         var out_bus_2_to = $('#out-bus-2-to').val();
         var out_bus_2_from = $('#out-bus-2-from').val();
         $('#ret-bus-2-to').val(out_bus_2_from);
@@ -379,30 +389,32 @@ $('#arrive-time').datetimepicker({
         var bus_route_2 = $('#out-bus-route-2').val();
         $('#ret-bus-route-2').val(bus_route_1);
         $('#ret-bus-route-1').val(bus_route_2);
-        set_ret_journey_alternative_buses('.out-bus-route-1-alt',2);
-        set_ret_journey_alternative_buses('.out-bus-route-2-alt',1);
+        set_ret_journey_alternative_buses('out-bus-route-1-alt',2);
+        set_ret_journey_alternative_buses('out-bus-route-2-alt',1);
       }
-      else if(no_of_buses==1){
+      else if(no_of_buses=='1'){
         $('#ret-bus-1').show(); 
         var bus_route_1 = $('#out-bus-route-1').val();
         $('#ret-bus-route-1').val(bus_route_1);
-        set_ret_journey_alternative_buses('.out-bus-route-1-alt',1);
+        set_ret_journey_alternative_buses('out-bus-route-1-alt',1);
       }
       else
         bus_route_1='Select';
     }
 
+//reverse the alternative buses
     function set_ret_journey_alternative_buses(parent_div,route){
 //      alert($(parent_div+' >div').length);
-      count = $(parent_div+' >div').length+1;
+      count = $('.'+parent_div+' >div').length+1;
       if(count>1)
-      $(parent_div).each(function(i,obj) {
+      $('.'+parent_div).each(function(i,obj) {
+      //var div_name = parent_div.replace('out','ret');
 //    var count = $(parent_div+' >div').length+1;
       var alt_bus = $('select', obj).val();
 //    alert($(this).(find)('option:selected').text());
 //    alert(alt_bus);
       var id = alt_bus;
-      var bus_div = '<label class="col-sm-6 control-label alt-title">Alternative bus</label><div class="col-sm-4"><select class="form-control" id="ret-bus-route-alt-'+id+'"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="15">15</option><option value="16B">16B</option><option value="17/17A/18">17/17A/18</option><option value="19">19</option><option value="20">20</option><option value="21B">21B</option><option value="23">23</option><option value="27">27</option><option value="62">62</option><option value="419">419</option><option value="X40">X40</option></select></div>'; 
+      var bus_div = '<label class="col-sm-6 control-label alt-title">Alternative bus</label><div class="col-sm-4"><select class="form-control" id="ret-bus-route-alt-'+id+'" name="ret-bus-route-'+route+'-alt[]"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="15">15</option><option value="16B">16B</option><option value="17/17A/18">17/17A/18</option><option value="19">19</option><option value="20">20</option><option value="21B">21B</option><option value="23">23</option><option value="27">27</option><option value="62">62</option><option value="419">419</option><option value="X40">X40</option></select></div>'; 
       $('.ret-bus-route-'+route+'-alt').append('<div class="dynamic-bus-form" id="">'+bus_div+'<a href="#" id="removeclass5" name="ret-bus-route-'+route+'-alt" class="removeclass5">&times;</a></div>');
       $('#ret-bus-route-alt-'+id).val(alt_bus);
       });
@@ -410,15 +422,28 @@ $('#arrive-time').datetimepicker({
 
 
     $("#saveForms").click(function () {
-      submitForms();
+      removeHiddenDivs();
+      //alert('hello');
+      //$("#page-wrapper > div[style*='display:none']").remove();
+      /*$("#page-wrapper").children().each(function(i){
+        console.log(i);
+        if($(this).css('display')=='none')
+          $(this).remove();
+      });*/
+
+      //$("#return-journey").remove();
+     // submitForms();
       //$(".myForms").submit(); // should show 3 alerts (one for each form submission
   });
 
-    $(".myForms").submit(function () {
-            alert('hi');
-      console.log("aaaaa");
+    $("#journey-form").submit(function (e) {
+          e.preventDefault();
+            //alert('hi');
+      //console.log("aaaaa");
+      submitForms();
     return true;
   });
+
 
     function submitForms(){
       var datastring = $("#journey-form,#return-journey-form").serialize();
@@ -427,13 +452,28 @@ $('#arrive-time').datetimepicker({
             url: "process-forms.php",
             data: datastring,
             dataType: "json",
-            success: function(data) {
-                //var obj = jQuery.parseJSON(data); if the dataType is not specified as json uncomment this
-                // do what ever you want with the server response
-            },
-            error: function(){
-                  alert('something went wrong!');
+            success: function(response) {
+            alert('successfully saved!');
+            window.location.replace("http://139.133.73.79:8888/DesireLines/my-journeys.php");
+         },
+            error: function(response){
+                  console.log(JSON.stringify(response));
+                  alert('database not connecting!');
+                  //window.location.replace("http://localhost:8888/DesireLines");
             }
         });
+    }
+
+    function removeHiddenDivs(){
+      if($('#out-bus-1').css('display')=='none')
+        $('#out-bus-1').remove();
+      if($('#out-bus-2').css('display')=='none')
+        $('#out-bus-2').remove();
+      if($('#return-journey').css('display')=='none')
+        $('#return-journey').remove();
+      if($('#ret-bus-1').css('display')=='none')
+        $('#ret-bus-1').remove();
+      if($('#ret-bus-2').css('display')=='none')
+        $('#ret-bus-2').remove();
     }
 </script>

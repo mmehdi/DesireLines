@@ -7,7 +7,7 @@
                 <div class="sidebar-collapse">
                     <ul class="nav" id="side-menu">
                     <li>
-                            <a href=""><i class="fa fa-bus fa-fw"></i> My Journeys</a>
+                            <a href="my-journeys.php"><i class="fa fa-bus fa-fw"></i> My Journeys</a>
                         </li>
                         <li>
                             <a href="register-journey.php"><i class="fa fa-th-large fa-fw"></i> Register Journey</a>
