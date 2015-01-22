@@ -104,6 +104,26 @@ bootbox.dialog({
     }
   }
 });
-}</script>
+}
+
+function deleteJourney(journey_id, journey_name){
+        var base_url = <?php echo json_encode(BASE_URL); ?>;
+      $.ajax({
+            type: "GET",
+            url: "delete-journey.php",
+            data: "jid="+journey_id+"&jname="+journey_name,
+            dataType: "json",
+            success: function(response) {
+            alert('successfully deleted!');
+            window.location.replace(base_url+'/DesireLines/my-journeys.php');
+         },
+            error: function(response){
+                  console.log(JSON.stringify(response));
+                  alert('database not connecting!');
+                  //window.location.replace("http://localhost:8888/DesireLines");
+            }
+        });
+}
+</script>
 <?php include('footer.php');?>
 
