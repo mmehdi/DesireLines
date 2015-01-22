@@ -1,5 +1,12 @@
-<?php include('core/init.core.php');?>
-<?php include('header.php');
+<?php include('core/init.core.php');
+
+ if(empty($_SESSION['status']) || $_SESSION['status']!=='verified') {
+  //var_dump($_SESSION);
+  header('Location: login.php');
+  die();
+}
+
+include('header.php');
 
 $result = db_fetch("SELECT array_to_json(journeys) FROM participant where twitter_handle='".$_SESSION['request_vars']['screen_name']."'");
 $row=pg_fetch_array($result);
@@ -50,9 +57,9 @@ foreach ($journey_ids as $key => $value) {
 
               echo "<td>".$value['destination_master']."</td>";
 
-              echo "<td><a href=\"journey-details.php?jid=".$value['id']."\" class=\"btn btn-default btn-sm active\" role=\"button\">View journey</a></td>";
+              echo "<td><a href=\"view-journey.php?jid=".$value['id']."\" class=\"btn btn-default btn-sm active\" role=\"button\">View journey</a></td>";
 
-              echo "<td><a href=\"#\" data-label=\"".$data_arr->{'products'}[$index]->{'fn'}."\" data-href=\"journey-delete.php?jid=".$value['id']."\" class=\"btn btn-danger btn-sm active\" role=\"button\" data-toggle=\"modal\" data-target=\"#confirm-delete\" >Delete journey</a></td>";
+              echo "<td><a href=\"#\" onClick='deleteBtnClicked(this);' data-name=\"".$value['name']."\" data-id=\"".$value['id']."\" class=\"btn btn-danger btn-sm active\" role=\"button\" data-toggle=\"modal\" data-target=\"#confirm-delete\" >Delete journey</a></td>";
 
               echo "</tr>";
 
@@ -71,4 +78,32 @@ foreach ($journey_ids as $key => $value) {
       </div><!--End of table-responsive-->
 
 </div> <!--<div class="row col-xs-12 col-sm-12 col-lg-10 col-md-12"-->
+<script>
+
+function deleteBtnClicked(event){
+    var jid = $(event).data('id');
+    var journey_name = $(event).data('name');
+
+bootbox.dialog({
+  message: 'Are you sure want to delete the journey :<strong>'+ journey_name+'</strong>',
+  title: "Confirmation",
+  buttons: {
+    cancel: {
+      label: "Cancel",
+      className: "btn-primary",
+      callback: function() {
+        //do nothing
+      }
+    },
+    danger: {
+      label: "Delete!",
+      className: "btn-danger",
+      callback: function() {
+        deleteJourney(jid,journey_name);
+      }
+    }
+  }
+});
+}</script>
 <?php include('footer.php');?>
+

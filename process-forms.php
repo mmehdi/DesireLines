@@ -9,14 +9,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $journey_purpose=$_POST['journey-purpose'];
   $days_travelling = $_POST['days-checkbox'];
   $days_travelling=to_pg_array($days_travelling,'string');
-  $journey_name=$_POST['journey-name'];
+  $journey_name=pg_escape_string($_POST['journey-name']);
 
   //store user if doenst exist - todo move this to login
   save_user($twitter_handle);
 
 
-  $master_going_from=$_POST['going-from'];
-  $master_going_to=$_POST['going-to'];
+  $master_going_from=pg_escape_string($_POST['going-from']);
+  $master_going_to=pg_escape_string($_POST['going-to']);
   $leave_at=strtotime($_POST['leave-time']);
   $arrive_at=strtotime($_POST['arrive-time']);
   $alert_time=$_POST['out-alert-time'];
@@ -42,8 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $out_bus_route_2=$_POST['out-bus-route-2'];
     $out_bus_route_2_buses[]=$out_bus_route_2;
     
-    $stage_going_from=$_POST['out-bus-2-from'];
-    $stage_going_to=$_POST['out-bus-2-to'];
+    $stage_going_from=pg_escape_string($_POST['out-bus-2-from']);
+    $stage_going_to=pg_escape_string($_POST['out-bus-2-to']);
 
     foreach ($_POST['out-bus-route-2-alt'] as $key => $value)
       $out_bus_route_2_buses[]=$value;
@@ -81,15 +81,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   //echo json_encode('200');
 }
 
+function escape_chars($string){
+  return str_replace("'", "\'", $string);
+}
+
 function save_return_journey(){
   
   $twitter_handle=$_POST['twitter-handle'];
-  $journey_name = $_POST['journey-name'].' return';
+  $journey_name = pg_escape_string($_POST['journey-name'].' return');
   $journey_purpose=$_POST['journey-purpose'];
   $days_travelling = $_POST['days-checkbox'];
   $days_travelling=to_pg_array($days_travelling,'string');
-  $master_going_from=$_POST['ret-going-from'];
-  $master_going_to=$_POST['ret-going-to'];
+  $master_going_from=pg_escape_string($_POST['ret-going-from']);
+  $master_going_to=pg_escape_string($_POST['ret-going-to']);
   $leave_at=strtotime($_POST['ret-leave-time']);
   $arrive_at=strtotime($_POST['ret-arrive-time']);
   $alert_time=$_POST['ret-alert-time'];
@@ -113,8 +117,8 @@ function save_return_journey(){
     $bus_route_2=$_POST['ret-bus-route-2'];
     $bus_route_2_buses[]=$bus_route_2;
     
-    $stage_going_from=$_POST['out-bus-2-from'];
-    $stage_going_to=$_POST['out-bus-2-to'];
+    $stage_going_from=pg_escape_string($_POST['out-bus-2-from']);
+    $stage_going_to=pg_escape_string($_POST['out-bus-2-to']);
 
     foreach ($_POST['out-bus-route-2-alt'] as $key => $value)
       $bus_route_2_buses[]=$value;

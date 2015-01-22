@@ -38,12 +38,14 @@
 	define("APIURL","http://dtp-24.sncs.abdn.ac.uk:8080/ecosystem-social-twitter/service");
 	
 	define("DB_CONNECTION","host=localhost port=5432 dbname=tweetdesk user=postgres password=5L1ght1y");
-
+	
+	//define('BASE_URL', 'http://sj.abdn.ac.uk');
+	define('BASE_URL', 'http://139.133.73.79:8888');
 	//twitter constants
 	define('CONSUMER_KEY', 'Pi5D2ADuRWW1HnG3DvjsWEJuV');
 	define('CONSUMER_SECRET', 'rJHFjopPrbXYjLKOIUmjzyDwbuRbL1Blei9fV8zbfnCo8uyQU0');
-	define('OAUTH_CALLBACK', 'http://139.133.73.79:8888/DesireLines/twitter-callback.php');
-
+	define('OAUTH_CALLBACK', BASE_URL.'/DesireLines/twitter-callback.php');
+	
 	//Deployment mode:
 	//define("APIURL","http://localhost:8080/smile-server/api-1.1");
 

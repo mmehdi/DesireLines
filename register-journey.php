@@ -33,8 +33,8 @@
     
   <div class="panel panel-info">
     <div class="panel-heading">Journey details</div>
-   
   <div class="panel-body">
+    <p>All fields are required.</p> 
       <div class="form-group">
         <label  class="col-sm-4 control-label">Your twitter handle</label>
         <div class="col-sm-6">
@@ -44,19 +44,19 @@
       <div class="form-group">
         <label  class="col-sm-4 control-label">Name this journey</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="journey-name" name="journey-name" placeholder="e.g commuting to work"> 
+          <input type="text" class="form-control" id="journey-name" name="journey-name" placeholder="e.g commuting to work" required> 
         </div>
       </div>
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going from</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="going-from" name="going-from" placeholder="origin - bus stop name"> 
+          <input type="text" class="form-control" id="going-from" name="going-from" placeholder="origin - bus stop name" required> 
         </div>
       </div>
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going to</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="going-to" name="going-to" placeholder="destination - bus stop name">                 
+          <input type="text" class="form-control" id="going-to" name="going-to" placeholder="destination - bus stop name" required>                 
         </div>
       </div>
       <div class="form-group" id='select-days'>
@@ -74,13 +74,13 @@
       <div class="form-group">
         <label  class="col-sm-4 control-label">I leave at</label>
         <div class="col-sm-2">
-          <input type='text' class="form-control" name="leave-time" id="leave-time" data-date-format="HH:mm" placeholder="time" value=""/>
+          <input type='text' class="form-control" name="leave-time" id="leave-time" data-date-format="HH:mm" placeholder="time" value="" required/>
         </div>
       </div>
       <div class="form-group">
         <label  class="col-sm-4 control-label">I arrive at</label>
         <div class="col-sm-2">
-          <input type='text' class="form-control" name="arrive-time" id="arrive-time" data-date-format="HH:mm" placeholder="time" value=""/>
+          <input type='text' class="form-control" name="arrive-time" id="arrive-time" data-date-format="HH:mm" placeholder="time" value="" required/>
         </div>
       </div>
       <div class="form-group">
@@ -164,13 +164,13 @@
         <div class="form-group">
           <label  class="col-sm-4 control-label">Where do you get off from the first bus?</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="out-bus-2-from" name="out-bus-2-from" placeholder="bus stop name"> 
+            <input type="text" class="form-control" id="out-bus-2-from" name="out-bus-2-from" placeholder="bus stop name" required> 
           </div>
         </div>
         <div class="form-group">
           <label  class="col-sm-4 control-label">From where do you take the next bus?</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="out-bus-2-to" name="out-bus-2-to" placeholder="bus stop name">                 
+            <input type="text" class="form-control" id="out-bus-2-to" name="out-bus-2-to" placeholder="bus stop name" required>                 
           </div>
         </div>
 
@@ -447,6 +447,7 @@ $('#ret-arrive-time').datetimepicker({
 
     function submitForms(){
       var datastring = $("#journey-form,#return-journey-form").serialize();
+      var base_url = <?php echo json_encode(BASE_URL); ?>;
       $.ajax({
             type: "POST",
             url: "process-forms.php",
@@ -454,7 +455,7 @@ $('#ret-arrive-time').datetimepicker({
             dataType: "json",
             success: function(response) {
             alert('successfully saved!');
-            window.location.replace("http://139.133.73.79:8888/DesireLines/my-journeys.php");
+            window.location.replace(base_url+'/DesireLines/my-journeys.php');
          },
             error: function(response){
                   console.log(JSON.stringify(response));

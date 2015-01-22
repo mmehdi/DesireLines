@@ -2,6 +2,10 @@
 include('core/init.core.php');
 include_once("twitter-login/twitteroauth.php");
 
+if(!extension_loaded('openssl'))
+    {
+        die('This app needs the Open SSL PHP extension.');
+    }
 
 if (isset($_REQUEST['oauth_token']) && $_SESSION['token']  !== $_REQUEST['oauth_token']) {
 
@@ -52,6 +56,7 @@ if (isset($_REQUEST['oauth_token']) && $_SESSION['token']  !== $_REQUEST['oauth_
 		$twitter_url = $connection->getAuthorizeURL($request_token['oauth_token']);
 		header('Location: ' . $twitter_url); 
 	}else{
+		var_dump($connection);
 		die("error connecting to twitter! try again later!");
 	}
 }

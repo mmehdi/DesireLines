@@ -207,6 +207,10 @@ class TwitterOAuth {
     curl_setopt($ci, CURLOPT_HEADERFUNCTION, array($this, 'getHeader'));
     curl_setopt($ci, CURLOPT_HEADER, FALSE);
 
+    //set proxy
+    //curl_setopt($ci, CURLOPT_PROXY, 'http://proxy.abdn.ac.uk:8080/');
+    //curl_setopt($ci, CURLOPT_HTTPPROXYTUNNEL, 1);
+
     switch ($method) {
       case 'POST':
         curl_setopt($ci, CURLOPT_POST, TRUE);

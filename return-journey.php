@@ -6,25 +6,25 @@
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going from</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="ret-going-from" name="ret-going-from" placeholder="origin - bus stop name"> 
+          <input type="text" class="form-control" id="ret-going-from" name="ret-going-from" placeholder="origin - bus stop name" required/> 
         </div>
       </div>
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going to</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="ret-going-to" name="ret-going-to" placeholder="destination - bus stop name">                 
+          <input type="text" class="form-control" id="ret-going-to" name="ret-going-to" placeholder="destination - bus stop name" required/>                 
         </div>
       </div>
       <div class="form-group">
         <label  class="col-sm-4 control-label">I start return journey at</label>
         <div class="col-sm-2">
-          <input type='text' class="form-control" name="ret-leave-time" id="ret-leave-time" data-date-format="HH:mm" placeholder="time" value=""/>
+          <input type='text' class="form-control" name="ret-leave-time" id="ret-leave-time" data-date-format="HH:mm" placeholder="time" value="" required/>
         </div>
       </div>
         <div class="form-group">
         <label  class="col-sm-4 control-label">I arrive at</label>
         <div class="col-sm-2">
-          <input type='text' class="form-control" name="ret-arrive-time" id="ret-arrive-time" data-date-format="HH:mm" placeholder="time" value=""/>
+          <input type='text' class="form-control" name="ret-arrive-time" id="ret-arrive-time" data-date-format="HH:mm" placeholder="time" value="" required/>
         </div>
       </div>
      
@@ -46,7 +46,7 @@
       <div class="form-group">
         <label class="col-sm-4 control-label">How many buses do you use?</label>
         <div class="col-sm-2">
-          <select class="form-control" id="ret-no-of-buses" name="ret-no-of-buses">
+          <select class="form-control" id="ret-no-of-buses" name="ret-no-of-buses" required>
             <option value='0'>Select</option>
             <option value='1'>1</option>
             <option value='2'>2</option>
@@ -98,13 +98,13 @@
         <div class="form-group">
           <label  class="col-sm-4 control-label">Where do you get off from the first bus?</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="ret-bus-2-from" name="ret-bus-2-from" placeholder="bus stop name"> 
+            <input type="text" class="form-control" id="ret-bus-2-from" name="ret-bus-2-from" placeholder="bus stop name" required/> 
           </div>
         </div>
         <div class="form-group">
           <label  class="col-sm-4 control-label">From where do you take the next bus?</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="ret-bus-2-to" name="ret-bus-2-to" placeholder="bus stop name">                 
+            <input type="text" class="form-control" id="ret-bus-2-to" name="ret-bus-2-to" placeholder="bus stop name" required/>                 
           </div>
         </div>
 

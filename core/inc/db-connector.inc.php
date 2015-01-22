@@ -8,6 +8,7 @@
 		//$user = "postgres";
 		$user = "dotrural";
 		$password = "postgres";
+		//$password = "sj00awesome";
 		$database = "userStudyFeb2015";
 
 		$db = pg_connect('host='.$hostname.' port='.$port.' dbname='.$database.' user='.$user.' password='.$password)
