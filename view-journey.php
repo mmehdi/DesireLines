@@ -123,7 +123,7 @@ foreach ($stages_ids as $sid) {
         echo '<div class="col-sm-4">';
           echo '<p class="form-control">';
           $bus_routes = $stages[0]['bus_routes']; 
-          echo implode('or ', $bus_routes);
+          echo implode(' or ', $bus_routes);
           echo '</p>';        
         echo'</div>';
       echo'</div>';

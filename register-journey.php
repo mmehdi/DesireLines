@@ -422,18 +422,7 @@ $('#ret-arrive-time').datetimepicker({
 
 
     $("#saveForms").click(function () {
-      removeHiddenDivs();
-      //alert('hello');
-      //$("#page-wrapper > div[style*='display:none']").remove();
-      /*$("#page-wrapper").children().each(function(i){
-        console.log(i);
-        if($(this).css('display')=='none')
-          $(this).remove();
-      });*/
-
-      //$("#return-journey").remove();
-     // submitForms();
-      //$(".myForms").submit(); // should show 3 alerts (one for each form submission
+      invalidateHiddenElements();
   });
 
     $("#journey-form").submit(function (e) {
@@ -466,7 +455,7 @@ $('#ret-arrive-time').datetimepicker({
     }
 
     function removeHiddenDivs(){
-      if($('#out-bus-1').css('display')=='none')
+      /*if($('#out-bus-1').css('display')=='none')
         $('#out-bus-1').remove();
       if($('#out-bus-2').css('display')=='none')
         $('#out-bus-2').remove();
@@ -475,6 +464,49 @@ $('#ret-arrive-time').datetimepicker({
       if($('#ret-bus-1').css('display')=='none')
         $('#ret-bus-1').remove();
       if($('#ret-bus-2').css('display')=='none')
-        $('#ret-bus-2').remove();
+        $('#ret-bus-2').remove();*/
+    }
+
+
+//invalidate hidden form elements before running html5 standard validation
+    function invalidateHiddenElements(){
+
+      //check validation for no of buses for outbound journey
+        if($('#out-no-of-buses').val() == 1){
+          $("#out-bus-2-from").prop("required", false);
+          $("#out-bus-2-to").prop("required", false);
+        }
+        else{
+          $("#out-bus-2-from").prop("required", true);
+          $("#out-bus-2-to").prop("required", true);
+        }
+
+      //check validation for return joruney
+
+      if($("input[name$='returnJourneyRadio']:checked").val()==1){
+          $("#ret-going-from").prop("required", true);
+          $("#ret-going-to").prop("required", true);
+          $("#ret-leave-time").prop("required", true);
+          $("#ret-arrive-time").prop("required", true);
+          $("#ret-no-of-buses").prop("required", true);
+      }
+      else{
+         $("#ret-going-from").prop("required", false);
+          $("#ret-going-to").prop("required", false);
+          $("#ret-leave-time").prop("required", false);
+          $("#ret-arrive-time").prop("required", false);
+          $("#ret-no-of-buses").prop("required", false);
+      }
+
+
+        if($('#ret-no-of-buses').val() == 2){
+          $("#ret-bus-2-from").prop("required", true);
+          $("#ret-bus-2-to").prop("required", true);
+        }
+        else{
+          $("#ret-bus-2-from").prop("required", false);
+          $("#ret-bus-2-to").prop("required", false);
+        }
+
     }
 </script>
