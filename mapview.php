@@ -1,8 +1,9 @@
+<?php include('core/init.core.php');?>
 <html>
     <head>
         <title></title>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-        <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
         <script type="text/javascript">
             var geocoder = new google.maps.Geocoder();
 
@@ -34,6 +35,8 @@
             }
 
             function initialize() {
+
+
                 ///57.147493,-2.095392
                 var latLng = new google.maps.LatLng(57.147493, -2.095392);
                 var map = new google.maps.Map(document.getElementById('mapCanvas'), {
@@ -47,6 +50,10 @@
                     map: map,
                     draggable: true
                 });
+
+                var input = document.getElementById("keyword");
+                var autocomplete = new google.maps.places.Autocomplete(input);
+                autocomplete.bindTo("bounds", map);
 
                 // Update current position info.
                 updateMarkerPosition(latLng);
@@ -66,11 +73,31 @@
                     updateMarkerStatus('Drag ended');
                     geocodePosition(marker.getPosition());
                 });
+
+
+                google.maps.event.addListener(autocomplete, "place_changed", function(){
+
+                    var place = autocomplete.getPlace();
+
+                    if (place.geometry.viewport) {
+                        map.fitBounds(place.geometry.viewport);
+                    } else {
+                        map.setCenter(place.geometry.location);
+                        map.setZoom(15);
+                    }
+
+                    marker.setPosition(place.geometry.location);
+                });
+
+                google.maps.event.addListener(map, "click", function(event){
+                    marker.setPosition(event.latLng);
+                });
+
             }
 
             // Onload handler to fire off the app.
             google.maps.event.addDomListener(window, 'load', initialize);
-        </script>
+</script>
         <style type="text/css">
             #mapCanvas {
                 width: 500px;
@@ -95,6 +122,11 @@
             <div id="info"></div>
             <b>Closest matching address:</b>
             <div id="address"></div>
+
+                    <div class="controls col-md-12 col-lg-12">
+            <input type="text" name="keyword" id="keyword">
+        </div>
+
             <button type="button" class="btn btn-default col-md-offset-4">Cancel</button>
             <button type="submit" class="btn btn-success" id="save-location">Done</button>
         </div>
