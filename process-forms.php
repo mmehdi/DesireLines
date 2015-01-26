@@ -21,6 +21,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
   $arrive_at=strtotime($_POST['arrive-time']);
   $alert_time=$_POST['out-alert-time'];
   
+  $master_going_from_lat=($_POST['going-from-lat']);
+  $master_going_from_long=($_POST['going-from-long']);
+  $master_going_to_lat=($_POST['going-to-lat']);
+  $master_going_to_long=($_POST['going-to-long']);
+
+
   $out_no_of_buses=$_POST['out-no-of-buses'];
 
 
@@ -45,21 +51,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     $stage_going_from=pg_escape_string($_POST['out-bus-2-from']);
     $stage_going_to=pg_escape_string($_POST['out-bus-2-to']);
 
+    $stage_going_from_lat=($_POST['out-bus-2-from-lat']);
+    $stage_going_from_long=($_POST['out-bus-2-from-long']);
+    $stage_going_to_lat=($_POST['out-bus-2-to-lat']);
+    $stage_going_to_long=($_POST['out-bus-2-to-long']);
+
     foreach ($_POST['out-bus-route-2-alt'] as $key => $value)
       $out_bus_route_2_buses[]=$value;
 
     $out_bus_route_2_buses=to_pg_array($out_bus_route_2_buses,'string');
     //split master into stages
 
-    save_journey_stage($master_going_from,$stage_going_from,$out_bus_route_1_buses,0,0,0,0);
+    save_journey_stage($master_going_from,$stage_going_from,$out_bus_route_1_buses,$master_going_from_lat,$master_going_from_long,$stage_going_from_lat,$stage_going_from_long);
     $journey_stage_ids[]=return_id('journey_stage');
 
-    save_journey_stage($stage_going_to,$master_going_to,$out_bus_route_2_buses,0,0,0,0);
+    save_journey_stage($stage_going_to,$master_going_to,$out_bus_route_2_buses,$stage_going_to_lat,$stage_going_to_long,$master_going_to_lat,$master_going_to_long);
     $journey_stage_ids[]=return_id('journey_stage');
   }
   //single bus journey
   else{
-    save_journey_stage($master_going_from,$master_going_to,$out_bus_route_1_buses,0,0,0,0);
+    save_journey_stage($master_going_from,$master_going_to,$out_bus_route_1_buses,$master_going_from_lat,$master_going_from_long,$master_going_to_lat,$master_going_to_long);
     $journey_stage_ids[]=return_id('journey_stage');
   }
   
@@ -78,11 +89,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
   http_response_code(200);
   echo json_encode('success');
-  //echo json_encode('200');
-}
 
-function escape_chars($string){
-  return str_replace("'", "\'", $string);
+//  die();
+  //echo json_encode('200');
 }
 
 function save_return_journey(){
@@ -98,6 +107,11 @@ function save_return_journey(){
   $arrive_at=strtotime($_POST['ret-arrive-time']);
   $alert_time=$_POST['ret-alert-time'];
   $no_of_buses=$_POST['ret-no-of-buses'];
+
+  $master_going_from_lat=($_POST['ret-going-from-lat']);
+  $master_going_from_long=($_POST['ret-going-from-long']);
+  $master_going_to_lat=($_POST['ret-going-to-lat']);
+  $master_going_to_long=($_POST['ret-going-to-long']);
 
   //iterate alternative buses
   $bus_route_1=$_POST['ret-bus-route-1'];
@@ -117,24 +131,31 @@ function save_return_journey(){
     $bus_route_2=$_POST['ret-bus-route-2'];
     $bus_route_2_buses[]=$bus_route_2;
     
-    $stage_going_from=pg_escape_string($_POST['out-bus-2-from']);
-    $stage_going_to=pg_escape_string($_POST['out-bus-2-to']);
+    $stage_going_from=pg_escape_string($_POST['ret-bus-2-from']);
+    $stage_going_to=pg_escape_string($_POST['ret-bus-2-to']);
 
-    foreach ($_POST['out-bus-route-2-alt'] as $key => $value)
+    $stage_going_from_lat=($_POST['ret-bus-2-from-lat']);
+    $stage_going_from_long=($_POST['ret-bus-2-from-long']);
+    $stage_going_to_lat=($_POST['ret-bus-2-to-lat']);
+    $stage_going_to_long=($_POST['ret-bus-2-to-long']);
+
+    foreach ($_POST['ret-bus-route-2-alt'] as $key => $value)
       $bus_route_2_buses[]=$value;
 
     $bus_route_2_buses=to_pg_array($bus_route_2_buses,'string');
     //split master into stages
 
-    save_journey_stage($master_going_from,$stage_going_from,$bus_route_1_buses,0,0,0,0);
+    save_journey_stage($master_going_from,$stage_going_from,$bus_route_1_buses,$master_going_from_lat,$master_going_from_long,$stage_going_from_lat,$stage_going_from_long);
+
+//    save_journey_stage($master_going_from,$stage_going_from,$bus_route_1_buses,0,0,0,0);
     $journey_stage_ids[]=return_id('journey_stage');
 
-    save_journey_stage($stage_going_to,$master_going_to,$bus_route_2_buses,0,0,0,0);
+    save_journey_stage($stage_going_to,$master_going_to,$bus_route_2_buses,$stage_going_to_lat,$stage_going_to_long,$master_going_to_lat,$master_going_to_long);
     $journey_stage_ids[]=return_id('journey_stage');
   }
   //single bus journey
   else{
-    save_journey_stage($master_going_from,$master_going_to,$bus_route_1_buses,0,0,0,0);
+    save_journey_stage($master_going_from,$master_going_to,$bus_route_1_buses,$master_going_from_lat,$master_going_from_long,$master_going_to_lat,$master_going_to_long);
     $journey_stage_ids[]=return_id('journey_stage');
   }
   
@@ -146,13 +167,16 @@ function save_return_journey(){
   update_participant($twitter_handle,$journey_id);
 }
 
+//store data in journey table
 function save_journey($status,$name,$from,$to,$time_of_departure,$time_of_arrival,$days_travelling,$alert_time,$created_at,$stages,$purpose,$direction){
     $query = "INSERT INTO journey (status, name, origin_master, destination_master, time_of_departure, time_of_arrival, days_travelling, alert_time, created_at, stages, type, direction) VALUES
     ('".$status."','".$name."','".$from."','".$to."',".$time_of_departure.",".$time_of_arrival.",'".$days_travelling."', ".$alert_time.",'".$created_at."','".$stages."','".$purpose."','".$direction."')";
 
+    //var_dump('saving journey');
     db_fetch($query);
 }
 
+//store data in journey_stage table
 function save_journey_stage($from,$to,$buses,$origin_lat,$origin_long,$dest_lat,$dest_long){
     $query = "INSERT INTO journey_stage (origin_bus_stop, dest_bus_stop, bus_routes, origin_lat, origin_long, dest_lat,dest_long) VALUES
     ('".$from."', '".$to."', '".$buses."', ".$origin_lat.",".$origin_long.",".$dest_lat.",".$dest_long.")";

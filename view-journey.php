@@ -73,13 +73,13 @@ foreach ($stages_ids as $sid) {
       </div>
       <div class="form-group">
         <label  class="col-sm-4 control-label">Going from</label>
-        <div class="col-sm-6">
+        <div class="col-sm-8">
             <p class="form-control"><?php echo $journey['origin_master'];?></p>
         </div>
       </div>
       <div class="form-group">
         <label  class="col-sm-4 control-label">Going to</label>
-        <div class="col-sm-6">
+        <div class="col-sm-8">
             <p class="form-control"><?php echo $journey['destination_master'];?></p>
         </div>
       </div>
@@ -141,14 +141,14 @@ foreach ($stages_ids as $sid) {
 
       echo '<div class="form-group">';
         echo '<label class="col-sm-4 control-label">Get off from the first bus at</label>';
-        echo '<div class="col-sm-4">';
+        echo '<div class="col-sm-8">';
           echo '<p class="form-control">'.$stages[0]['dest_bus_stop'].'</p>';
         echo '</div>';
       echo '</div>';
 
       echo '<div class="form-group">';
         echo '<label class="col-sm-4 control-label">Take the second bus from</label>';
-        echo '<div class="col-sm-4">';
+        echo '<div class="col-sm-8">';
           echo '<p class="form-control">'.$stages[1]['origin_bus_stop'].'</p>';
         echo '</div>';
       echo '</div>';

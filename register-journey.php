@@ -50,13 +50,20 @@
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going from</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="going-from" name="going-from" placeholder="origin - bus stop name" required> 
+          <input type="text" class="form-control" id="going-from" name="going-from" placeholder="origin" onclick="lauchModal(this);" required>
+          <input type="hidden" name="going-from-lat" id="going-from-lat" value=0>
+          <input type="hidden" name="going-from-long" id="going-from-long" value=0>
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mapModal" data-source="going-from">Map</button> 
         </div>
       </div>
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going to</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="going-to" name="going-to" placeholder="destination - bus stop name" required>                 
+          <input type="text" class="form-control" id="going-to" name="going-to" placeholder="destination" required>  
+          <input type="hidden" name="going-to-lat" id="going-to-lat" value=0>  
+          <input type="hidden" name="going-to-long" id="going-to-long" value=0>                            
+          <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mapModal" data-source="going-to">Map</button>
         </div>
       </div>
       <div class="form-group" id='select-days'>
@@ -164,13 +171,19 @@
         <div class="form-group">
           <label  class="col-sm-4 control-label">Where do you get off from the first bus?</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="out-bus-2-from" name="out-bus-2-from" placeholder="bus stop name" required> 
+            <input type="text" class="form-control" id="out-bus-2-from" name="out-bus-2-from" placeholder="origin" required> 
+            <input type="hidden" name="out-bus-2-from-lat" id="out-bus-2-from-lat" value=0>  
+          <input type="hidden" name="out-bus-2-from-long" id="out-bus-2-from-long" value=0>                            
+          <button type="button" class="btn btn-primary btn-xs" data-placement="top" data-toggle="modal" data-target="#mapModal" data-source="out-bus-2-from">Map</button>
           </div>
         </div>
         <div class="form-group">
           <label  class="col-sm-4 control-label">From where do you take the next bus?</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="out-bus-2-to" name="out-bus-2-to" placeholder="bus stop name" required>                 
+            <input type="text" class="form-control" id="out-bus-2-to" name="out-bus-2-to" placeholder="destination" required>  
+            <input type="hidden" name="out-bus-2-to-lat" id="out-bus-2-to-lat" value=0>  
+          <input type="hidden" name="out-bus-2-to-long" id="out-bus-2-to-long" value=0>                            
+          <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mapModal" data-source="out-bus-2-to">Map</button>               
           </div>
         </div>
 
@@ -236,8 +249,8 @@
       <button type="submit" class="btn btn-success" id="saveForms" form="journey-form">Save</button>
 </form>
 </div> <!--<div class="row col-xs-12 col-sm-12 col-lg-10 col-md-12"-->
-
 <?php include('footer.php');?>
+<?php include('mapview.php');?>
 
 <script type="text/javascript">
 
@@ -454,19 +467,6 @@ $('#ret-arrive-time').datetimepicker({
         });
     }
 
-    function removeHiddenDivs(){
-      /*if($('#out-bus-1').css('display')=='none')
-        $('#out-bus-1').remove();
-      if($('#out-bus-2').css('display')=='none')
-        $('#out-bus-2').remove();
-      if($('#return-journey').css('display')=='none')
-        $('#return-journey').remove();
-      if($('#ret-bus-1').css('display')=='none')
-        $('#ret-bus-1').remove();
-      if($('#ret-bus-2').css('display')=='none')
-        $('#ret-bus-2').remove();*/
-    }
-
 
 //invalidate hidden form elements before running html5 standard validation
     function invalidateHiddenElements(){
@@ -508,5 +508,12 @@ $('#ret-arrive-time').datetimepicker({
           $("#ret-bus-2-to").prop("required", false);
         }
 
+    }
+
+
+    function lauchModal(input){
+      //alert('click');
+    //  if($(input).val()=='')
+       //   $('#mapModal').modal('show');
     }
 </script>

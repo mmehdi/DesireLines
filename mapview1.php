@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html this one from google maps>
 <html>
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
@@ -6,6 +6,7 @@
     <style>
       html, body, #map-canvas {
         height: 100%;
+        width:100%;
         margin: 0px;
         padding: 0px
       }

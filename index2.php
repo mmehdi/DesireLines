@@ -1,6 +1,6 @@
 <?php
 include('core/init.core.php');
-include_once("inc/twitteroauth.php");
+include_once("twitter-login/twitteroauth.php");
 //just simple session reset on logout click
 if($_GET["reset"]==1)
 {

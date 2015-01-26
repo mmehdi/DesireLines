@@ -1,41 +1,13 @@
-<!-- Modal -->
-<div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="mapModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <!--h4 class="modal-title" id="mapModalLabel"></h4-->
-      </div>
-      <div class="modal-body">
-        <p>Click on the map to select your location or use the search box.</p>
-        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-        <div id="mapCanvas" class="col-lg-8 col-md-8"></div>
-        <div id="infoPanel">
-            <!--b>Marker status:</b-->
-            <!--div id="markerStatus"><i>Click and drag the marker.</i></div-->
-            <b>Current position:</b>
-            <div id="info"></div>
-            <b>Closest matching address:</b>
-            <div id="address"></div>
-            <input type="hidden" name="lat" id="lat" value=0>
-            <input type="hidden" name="lat" id="long" value=0>
-        </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onClick="mapviewSave();" id="mapModalSaveBtn" data-source="">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<style type="text/css">
+<?php include('core/init.core.php');?>
+<html>
+    <head>
+        <title></title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <style type="text/css">
             #mapCanvas {
-                  width: 100%;
-                  min-height: 300px;
-                  margin: 0;
+                width: 50%;
+                height: 50%;
+                float: left;
             }
             #infoPanel {
                 float: left;
@@ -75,11 +47,6 @@
 
       .pac-container {
         font-family: Roboto;
-            background-color: #FFF;
-        z-index: 20;
-        position: fixed;
-        display: inline-block;
-        float: left;
       }
 
       #type-selector {
@@ -94,19 +61,32 @@
         font-weight: 300;
       }
 
+        </style>
+    </head>
+    <body>
+        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+        <div id="mapCanvas"></div>
+        <div id="infoPanel">
+            <!--b>Marker status:</b-->
+            <!--div id="markerStatus"><i>Click and drag the marker.</i></div-->
+            <b>Current position:</b>
+            <div id="info"></div>
+            <b>Closest matching address:</b>
+            <div id="address"></div>
 
-.modal{
-    z-index: 20;   
-}
-.modal-backdrop{
-    z-index: 10;        
-}
+                    <div class="controls col-md-12 col-lg-12">
+            <input type="text" name="keyword" id="keyword">
+        </div>
 
-</style>
+            <button type="button" class="btn btn-default col-md-offset-4">Cancel</button>
+            <button type="submit" class="btn btn-success" id="save-location">Done</button>
+        </div>
+    </body>
+</html>
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
         <script type="text/javascript">
             var geocoder = new google.maps.Geocoder();
-            var map;
+
             function geocodePosition(pos) {
                 geocoder.geocode({
                     latLng: pos
@@ -119,20 +99,6 @@
                 });
             }
 
-            //get lat long from address
-            function getLatLong(address){
-                geocoder.geocode({'address':address},function(results, status){
-                    if (status == google.maps.GeocoderStatus.OK) {
-
-                        updateMarkerAddress(results[0].formatted_address);
-                        //return results[0].geometry.location;
-              } else {
-                //alert("Geocode was not successful for the following reason: " + status)
-                updateMarkerAddress('Cannot determine address at this location.')
-                }
-             });
-            }
-
             function updateMarkerStatus(str) {
                 //document.getElementById('markerStatus').innerHTML = str;
             }
@@ -142,9 +108,6 @@
                     latLng.lat(),
                     latLng.lng()
                 ].join(', ');
-
-                    $('#lat').val(latLng.lat());
-                    $('#long').val(latLng.lng());
             }
 
             function updateMarkerAddress(str) {
@@ -156,7 +119,7 @@
 
                 ///57.147493,-2.095392
                 var latLng = new google.maps.LatLng(57.147493, -2.095392);
-                map = new google.maps.Map(document.getElementById('mapCanvas'), {
+                var map = new google.maps.Map(document.getElementById('mapCanvas'), {
                     zoom: 8,
                     center: latLng,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -237,34 +200,4 @@
 
             // Onload handler to fire off the app.
             google.maps.event.addDomListener(window, 'load', initialize);
-
-            //fix modal issue with google map
-            $('#mapModal').on('shown.bs.modal', function (e) {
-                //alert('hi');
-                google.maps.event.trigger(map, 'resize');
-                map.setCenter(new google.maps.LatLng(57.147493, -2.095392));
-
-                //find out which form field opened the map
-                var btn = $(e.relatedTarget); // Button that triggered the modal
-                var source = btn.data('source'); // Extract info from data-* attributes
-                $('#mapModalSaveBtn').data('source', source);
-
-               /* if($('#'+source).length>0)
-                    getLatLong($('#'+source+'-lat').val($('#lat').val()),$('#'+source+'-lat').val($('#lat').val()));*/
-
-           });
-
-        
-        //store map values in the form
-            function mapviewSave(){
-                //e.preventDefault();
-                var source = '#'+$('#mapModalSaveBtn').data('source');
-                
-                $(source).val($('#address').html());
-                
-                $(source+'-lat').val($('#lat').val());
-                $(source+'-long').val($('#long').val());
-
-                 $('#mapModal').modal('hide');
-        };
 </script>
