@@ -1,3 +1,10 @@
+ <style>
+      html, body, #map-canvas {
+        height: 300px;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
 <?php include('core/init.core.php');
 
  if(empty($_SESSION['status']) || $_SESSION['status']!=='verified') {
@@ -163,6 +170,14 @@ foreach ($stages_ids as $sid) {
         echo '</div>';
       echo '</div>';
       }?>
+
+            <div class="form-group">
+        <label class="col-sm-4 control-label">Journey Map</label>
+        <div class="col-sm-8">
+              <div id="map-canvas"></div>      
+        </div>
+      </div>
+
     <!--/form-->
     </div>      <!--div class="panel-body"-->
 
@@ -174,9 +189,9 @@ foreach ($stages_ids as $sid) {
 </div> <!--<div class="row col-xs-12 col-sm-12 col-lg-10 col-md-12"-->
 
 <?php include('footer.php');?>
-
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
 <script type="text/javascript">
-
+    
 $('#leave-time').datetimepicker({
   pickDate: false
 });
@@ -192,5 +207,59 @@ $('#ret-leave-time').datetimepicker({
 $('#ret-arrive-time').datetimepicker({
   pickDate: false
 });
+// This example creates a 2-pixel-wide red polyline showing
+// the path of William Kingsford Smith's first trans-Pacific flight between
+// Oakland, CA, and Brisbane, Australia.
 
+function initialize() {
+
+  var count = <?php echo json_encode(count($stages)); ?>;
+  var lat = <?php echo json_encode($stages[0]['origin_lat']); ?>;
+  var longitude = <?php echo json_encode($stages[0]['dest_long']); ?>;
+  
+  var mapOptions = {
+    zoom: 8,
+    center: new google.maps.LatLng(lat, longitude),
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+  };
+
+  var map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+
+//mixing php with javascript
+  <?php $index = 0; ?>
+
+  var busRouteCoordinates=[];
+  //while (i<count){
+    <?php 
+
+    while($index<count($stages)) {?>
+   
+    var origin_latitude = <?php echo json_encode($stages[$index]['origin_lat']); ?>;
+    var origin_longitude = <?php echo json_encode($stages[$index]['origin_long']); ?>;
+    var dest_lat = <?php echo json_encode($stages[$index]['dest_lat']); ?>;
+    var dest_long = <?php echo json_encode($stages[$index]['dest_long']); ?>;
+
+//console.log( <?php echo json_encode($stages[0]['dest_long']); ?>);
+//console.log(i);
+
+    busRouteCoordinates.push(new google.maps.LatLng(origin_latitude, origin_longitude), new google.maps.LatLng(dest_lat,dest_long));
+
+  <?php $index++;}?>
+
+//    console.log('cooordinates'+JSON.stringify(busRouteCoordinates));
+
+  var busPath = new google.maps.Polyline({
+    path: busRouteCoordinates,
+    geodesic: true,
+    strokeColor: '#FF0000',
+    strokeOpacity: 1.0,
+    strokeWeight: 2
+  });
+
+  busPath.setMap(map);
+
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
 </script>
