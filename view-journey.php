@@ -99,13 +99,13 @@ foreach ($stages_ids as $sid) {
       <div class="form-group">
         <label  class="col-sm-4 control-label">Leave time</label> 
         <div class="col-sm-2">
-          <p class="form-control"><?php echo date('H:m',$journey['time_of_departure']);?></p>
+          <p class="form-control"><?php echo date('H:i',$journey['time_of_departure']);?></p>
         </div>
       </div>
       <div class="form-group">
         <label  class="col-sm-4 control-label">Arrive time</label>
         <div class="col-sm-2">
-          <p class="form-control"><?php echo date('H:m',$journey['time_of_arrival']);?></p>
+          <p class="form-control"><?php echo date('H:i',$journey['time_of_arrival']);?></p>
         </div>
       </div>
       <div class="form-group">

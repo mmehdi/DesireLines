@@ -255,19 +255,23 @@
 <script type="text/javascript">
 
 $('#leave-time').datetimepicker({
-  pickDate: false
+  pickDate: false,
+  stepMinute: 05
 });
 
 $('#arrive-time').datetimepicker({
-  pickDate: false
+  pickDate: false,
+  stepMinute: 05
 });
 
 $('#ret-leave-time').datetimepicker({
-  pickDate: false
+  pickDate: false,
+  stepMinute: 05
 });
 
 $('#ret-arrive-time').datetimepicker({
-  pickDate: false
+  pickDate: false,
+  stepMinute: 05
 });
 
 
