@@ -172,7 +172,7 @@ foreach ($stages_ids as $sid) {
       }?>
 
             <div class="form-group">
-        <label class="col-sm-4 control-label">Journey Map</label>
+        <label class="col-sm-4 control-label">Journey map</label>
         <div class="col-sm-8">
               <div id="map-canvas"></div>      
         </div>

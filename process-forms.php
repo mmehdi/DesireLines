@@ -83,9 +83,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
   $is_return_journey = $_POST['returnJourneyRadio'];
   
-  if($is_return_journey==1)
+  if($is_return_journey==1){
     save_return_journey();
-
+    //set return id in master journey
+    $return_id = return_id('journey');
+    db_fetch("UPDATE journey SET return=".$return_id." where id=".$journey_id);
+  }
 
   http_response_code(200);
   echo json_encode('success');
@@ -174,6 +177,10 @@ function save_journey($status,$name,$from,$to,$time_of_departure,$time_of_arriva
 
     //var_dump('saving journey');
     db_fetch($query);
+
+    //set self master id
+    $id = return_id('journey');
+    db_fetch("UPDATE journey SET master=".$id." where id=".$id);
 }
 
 //store data in journey_stage table

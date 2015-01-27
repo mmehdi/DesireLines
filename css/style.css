@@ -82,4 +82,7 @@ white-space: nowrap;
 .review-info-btn{
     margin-bottom: 10px;
 }
+
+.navbar-fixed-top, .navbar-fixed-bottom {
+z-index: 1; /*for fixing google map z index*/
 }

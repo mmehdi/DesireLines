@@ -59,10 +59,9 @@ foreach ($journey_ids as $key => $value) {
 
               echo "<td><a href=\"view-journey.php?jid=".$value['id']."\" class=\"btn btn-default btn-sm active\" role=\"button\">View journey</a></td>";
 
-              echo "<td><a href=\"#\" onClick='deleteBtnClicked(this);' data-name=\"".$value['name']."\" data-id=\"".$value['id']."\" class=\"btn btn-danger btn-sm active\" role=\"button\" data-toggle=\"modal\" data-target=\"#confirm-delete\" >Delete journey</a></td>";
+              echo "<td><a href=\"#\" onClick='deleteBtnClicked(this);' data-name=\"".$value['name']."\" data-id=\"".$value['id']."\" data-returnid=\"".$value['return']."\" class=\"btn btn-danger btn-sm active\" role=\"button\" data-toggle=\"modal\" data-target=\"#confirm-delete\" >Delete journey</a></td>";
 
               echo "</tr>";
-
               $index++;
             }
             ?>
@@ -83,9 +82,15 @@ foreach ($journey_ids as $key => $value) {
 function deleteBtnClicked(event){
     var jid = $(event).data('id');
     var journey_name = $(event).data('name');
+    var return_id = $(event).data('returnid');
+
+    var message_with_return_journey='';
+    if(return_id>0)
+      message_with_return_journey='<div class="row"><div class="col-md-12"> <form class="form-horizontal">  This journey also has a return journey!  <div class="form-group">  <div class="col-md-12"> <div class="checkbox"> <label for="deleteReturn"> <input type="checkbox" name="deleteReturn" id="deleteReturn" value=1>Delete return journey.</label> </div> </div> </div></form> </div>  </div>';
+
 
 bootbox.dialog({
-  message: 'Are you sure want to delete the journey :<strong>'+ journey_name+'</strong>',
+  message: 'Are you sure want to delete the journey :<strong>'+ journey_name+'</strong><br/><br/>'+message_with_return_journey,
   title: "Confirmation",
   buttons: {
     cancel: {
@@ -99,19 +104,24 @@ bootbox.dialog({
       label: "Delete!",
       className: "btn-danger",
       callback: function() {
-        deleteJourney(jid,journey_name);
+        if($("input[name$='deleteReturn']:checked").val()==1)
+            deleteJourney(jid,journey_name,return_id);
+        else
+          deleteJourney(jid,journey_name,0); //if id is 0. dont delete return journey
+//         console.log("Hi "+ $('#deleteReturn').val());
+   
       }
     }
   }
 });
 }
 
-function deleteJourney(journey_id, journey_name){
+function deleteJourney(journey_id, journey_name, return_journey_id){
         var base_url = <?php echo json_encode(BASE_URL); ?>;
       $.ajax({
             type: "GET",
             url: "delete-journey.php",
-            data: "jid="+journey_id+"&jname="+journey_name,
+            data: "jid="+journey_id+"&jname="+journey_name+"&return_id="+return_journey_id,
             dataType: "json",
             success: function(response) {
             alert('successfully deleted!');
