@@ -11,8 +11,8 @@
     <script type="text/javascript" src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
 
     <!-- Page-Level Plugin Scripts - Dashboard -->
-    <script type="text/javascript" src="js/plugins/morris/raphael-2.1.0.min.js"></script>
-    <script type="text/javascript" src="js/plugins/morris/morris.js"></script>
+    <!--script type="text/javascript" src="js/plugins/morris/raphael-2.1.0.min.js"></script-->
+    <!--script type="text/javascript" src="js/plugins/morris/morris.js"></script-->
 
     <!-- SB Admin Scripts - Include with every page -->
     <script type="text/javascript" src="js/sb-admin.js"></script>

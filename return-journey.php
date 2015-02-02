@@ -30,7 +30,7 @@
         </div>
       </div>
         <div class="form-group">
-        <label  class="col-sm-4 control-label">I arrive at</label>
+        <label  class="col-sm-4 control-label">I typically arrive by</label>
         <div class="col-sm-2">
           <input type='text' class="form-control" name="ret-arrive-time" id="ret-arrive-time" data-date-format="HH:mm" placeholder="time" value="" required/>
         </div>

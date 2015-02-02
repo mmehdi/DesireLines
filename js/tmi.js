@@ -1,5 +1,5 @@
 //dynamic keyword fields
-    var fieldCount = 1; //to keep track of text box added
+   /* var fieldCount = 1; //to keep track of text box added
 
     $("#add-keyword").click(function (e)  //on add input button click
     {
@@ -32,4 +32,8 @@
                 zk--; //decrement textbox
         }
         return false;
-    });
+    });*/
+$(document).ready(function(){
+//$(".iffyTip" ).mouseenter(function() {
+
+ });
