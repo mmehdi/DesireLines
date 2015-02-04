@@ -50,22 +50,28 @@
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going from</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="going-from" name="going-from" placeholder="origin" onclick="lauchModal(this);" required>
+          <input type="text" class="form-control" id="going-from" name="going-from" placeholder="origin" onclick="going_from_showMap(this);" required>
           <input type="hidden" name="going-from-lat" id="going-from-lat" value=0>
           <input type="hidden" name="going-from-long" id="going-from-long" value=0>
           <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mapModal" data-source="going-from">Map</button> 
+          <!--button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mapModal" data-source="going-from">Map</button--> 
         </div>
       </div>
+
+      <?php include('mapViews/going-from-mapview.php');?>
+
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going to</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="going-to" name="going-to" placeholder="destination" required>  
+          <input type="text" class="form-control" id="going-to" name="going-to" placeholder="destination" onclick="going_to_showMap(this);" required>  
           <input type="hidden" name="going-to-lat" id="going-to-lat" value=0>  
-          <input type="hidden" name="going-to-long" id="going-to-long" value=0>                            
-          <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mapModal" data-source="going-to">Map</button>
+          <input type="hidden" name="going-to-long" id="going-to-long" value=0>                         
+          <!--button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mapModal" data-source="going-to">Map</button-->
         </div>
       </div>
+
+      <?php include('mapViews/going-to-mapview.php');?>
+
       <div class="form-group" id='select-days'>
         <label  class="col-sm-4 control-label">Days of tavel</label>
         <div class="col-sm-8">
@@ -112,7 +118,8 @@
             <option value = "commuting">Commuting</option>
             <option value = "leisure">Leisure</option>
             <option value = "school">School run</option>
-            <option value = "business">Business Trip</option>
+            <option value = "business">Business trip</option>
+            <option value = "other">Other</option>
           </select>
         </div>
       </div>
@@ -129,7 +136,7 @@
 
       <div id="out-bus-1"> <!--out-bus-1, out-bus-route-1, out-bus-route-1-alt-->
         <div class="form-group col-sm-8 out-bus-route-1" >
-          <label class="col-sm-6 control-label">Bus route # (FirstAberdeen)</label>
+          <label class="col-sm-6 control-label">Bus route num. (FirstAberdeen)</label>
           <div class="col-sm-4">
             <select class="form-control" id="out-bus-route-1" name="out-bus-route-1">
               <option value="1">1</option>
@@ -171,24 +178,29 @@
         <div class="form-group">
           <label  class="col-sm-4 control-label">Where do you get off from the first bus?</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="out-bus-2-from" name="out-bus-2-from" placeholder="origin" required> 
+            <input type="text" class="form-control" id="out-bus-2-from" name="out-bus-2-from" placeholder="origin"  onclick="out_bus_2_from_showMap(this);" required> 
             <input type="hidden" name="out-bus-2-from-lat" id="out-bus-2-from-lat" value=0>  
           <input type="hidden" name="out-bus-2-from-long" id="out-bus-2-from-long" value=0>                            
-          <button type="button" class="btn btn-primary btn-xs" data-placement="top" data-toggle="modal" data-target="#mapModal" data-source="out-bus-2-from">Map</button>
+          <!--button type="button" class="btn btn-primary btn-xs" data-placement="top" data-toggle="modal" data-target="#mapModal" data-source="out-bus-2-from">Map</button-->
           </div>
         </div>
+        
+        <?php include('mapViews/out-bus-2-from-mapview.php');?>
+
         <div class="form-group">
           <label  class="col-sm-4 control-label">From where do you take the next bus?</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="out-bus-2-to" name="out-bus-2-to" placeholder="destination" required>  
+            <input type="text" class="form-control" id="out-bus-2-to" name="out-bus-2-to" placeholder="destination" onclick="out_bus_2_to_showMap(this);" required>  
             <input type="hidden" name="out-bus-2-to-lat" id="out-bus-2-to-lat" value=0>  
           <input type="hidden" name="out-bus-2-to-long" id="out-bus-2-to-long" value=0>                            
-          <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mapModal" data-source="out-bus-2-to">Map</button>               
+          <!--button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mapModal" data-source="out-bus-2-to">Map</button-->               
           </div>
         </div>
 
+        <?php include('mapViews/out-bus-2-to-mapview.php');?>
+
         <div class="form-group col-sm-8">
-          <label class="col-sm-6 control-label">Bus route # (FirstAberdeen)</label>
+          <label class="col-sm-6 control-label">Bus route num. (FirstAberdeen)</label>
           <div class="col-sm-4">
             <select class="form-control" id="out-bus-route-2" name="out-bus-route-2">
               <option value="1">1</option>
@@ -250,7 +262,7 @@
 </form>
 </div> <!--<div class="row col-xs-12 col-sm-12 col-lg-10 col-md-12"-->
 <?php include('footer.php');?>
-<?php include('mapview.php');?>
+<?php //include('mapview.php');?>
 
 <script type="text/javascript">
 
@@ -259,10 +271,20 @@ $('#leave-time').datetimepicker({
   stepMinute: 05
 });
 
+
 $('#arrive-time').datetimepicker({
   pickDate: false,
-  stepMinute: 05
+  stepMinute: 05,
+  defaultDate: ""
 });
+
+//$("#leave-time").on("dp.change",function (e) {
+$("#arrive-time").on("dp.show",function (e) {
+ // alert($("#arrive-time").val());
+  if($('#arrive-time').val().length===0)
+    $('#arrive-time').data("DateTimePicker").setDate($('#leave-time').val());
+});
+
 
 $('#ret-leave-time').datetimepicker({
   pickDate: false,
@@ -273,6 +295,10 @@ $('#ret-arrive-time').datetimepicker({
   pickDate: false,
   stepMinute: 05
 });
+
+/*$("#leave-time").datetimepicker({
+
+});*/
 
 
 
@@ -460,8 +486,8 @@ $('#ret-arrive-time').datetimepicker({
             data: datastring,
             dataType: "json",
             success: function(response) {
-            alert('successfully saved!');
-            window.location.replace(base_url+'/DesireLines/my-journeys.php');
+            alert('Your journey has been saved!');
+            window.location.replace(base_url+'/my-journeys.php');
          },
             error: function(response){
                   console.log(JSON.stringify(response));
@@ -514,10 +540,12 @@ $('#ret-arrive-time').datetimepicker({
 
     }
 
-
-    function lauchModal(input){
-      //alert('click');
-    //  if($(input).val()=='')
-       //   $('#mapModal').modal('show');
+    $(document).ready(function() {
+      $(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
     }
+  });
+});
 </script>

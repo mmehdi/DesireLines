@@ -77,9 +77,9 @@ foreach ($journey_ids as $key => $value) {
 
               echo "<td data-original-title='".implode (', ',$value['days_travelling'])."' data-toggle='tooltip' data-container='body' data-placement='bottom' style='text-align: center;'>".$days_travelling."</td>";
 
-              echo "<td data-container='body' data-toggle='tooltip' data-placement='bottom' style='text-align: center;'>".date('H:i',$value['time_of_departure'])."</td>";
+              echo "<td data-container='body' data-toggle='tooltip' data-placement='bottom' style='text-align: center;'>".sprintf('%02d', $value['time_of_departure']/100).":".sprintf('%02d', $value['time_of_departure']%100)."</td>";//date('H:i',$value['time_of_departure'])."</td>";
 
-              echo "<td data-container='body' data-toggle='tooltip' data-placement='bottom' style='text-align: center;'>".date('H:i',$value['time_of_arrival'])."</td>";
+              echo "<td data-container='body' data-toggle='tooltip' data-placement='bottom' style='text-align: center;'>".sprintf('%02d', $value['time_of_arrival']/100).":".sprintf('%02d', $value['time_of_arrival']%100)."</td>";//date('H:i',$value['time_of_arrival'])."</td>";
 
               echo "<td data-container='body' data-toggle='tooltip' data-placement='bottom' style='text-align: center;'><a href=\"view-journey.php?jid=".$value['id']."\" class=\"btn btn-default btn-sm active\" role=\"button\">Journey details</a></td>";
 
@@ -149,7 +149,7 @@ function deleteJourney(journey_id, journey_name, return_journey_id){
             dataType: "json",
             success: function(response) {
             alert('successfully deleted!');
-            window.location.replace(base_url+'/DesireLines/my-journeys.php');
+            window.location.replace(base_url+'/my-journeys.php');
          },
             error: function(response){
                   console.log(JSON.stringify(response));

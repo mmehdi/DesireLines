@@ -6,7 +6,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">DesireLines</a>
+                <a class="navbar-brand" href="index.php">Tweeting Travel</a>
             </div>
             <!-- /.navbar-header -->
 

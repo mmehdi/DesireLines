@@ -17,10 +17,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
   $master_going_from=pg_escape_string($_POST['going-from']);
   $master_going_to=pg_escape_string($_POST['going-to']);
-  $leave_at=strtotime($_POST['leave-time']);
-  $arrive_at=strtotime($_POST['arrive-time']);
+  //$leave_at=strtotime($_POST['leave-time']);
+  //$arrive_at=strtotime($_POST['arrive-time']);
+  $leave_at=intval(str_replace(":", "", $_POST['leave-time']));
+  $arrive_at=intval(str_replace(":", "", $_POST['arrive-time']));
+  
   $alert_time=$_POST['out-alert-time'];
   
+  //var_dump('arrive time'.intval(str_replace(":", "", $_POST['leave-time'])));
+  //die();
+
+
   $master_going_from_lat=($_POST['going-from-lat']);
   $master_going_from_long=($_POST['going-from-long']);
   $master_going_to_lat=($_POST['going-to-lat']);
@@ -106,8 +113,12 @@ function save_return_journey(){
   $days_travelling=to_pg_array($days_travelling,'string');
   $master_going_from=pg_escape_string($_POST['ret-going-from']);
   $master_going_to=pg_escape_string($_POST['ret-going-to']);
-  $leave_at=strtotime($_POST['ret-leave-time']);
-  $arrive_at=strtotime($_POST['ret-arrive-time']);
+  //$leave_at=strtotime($_POST['ret-leave-time']);
+  //$arrive_at=strtotime($_POST['ret-arrive-time']);
+  $leave_at=intval(str_replace(":", "", $_POST['ret-leave-time']));
+  $arrive_at=intval(str_replace(":", "", $_POST['ret-arrive-time']));
+  
+
   $alert_time=$_POST['ret-alert-time'];
   $no_of_buses=$_POST['ret-no-of-buses'];
 

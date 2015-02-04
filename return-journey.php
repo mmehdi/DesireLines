@@ -6,23 +6,29 @@
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going from</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="ret-going-from" name="ret-going-from" placeholder="origin" required/> 
+          <input type="text" class="form-control" id="ret-going-from" name="ret-going-from" placeholder="origin" onclick="ret_going_from_showMap(this);" required/> 
           <input type="hidden" name="ret-going-from-lat" id="ret-going-from-lat" value=0>
           <input type="hidden" name="ret-going-from-long" id="ret-going-from-long" value=0>
           <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mapModal" data-source="ret-going-from">Map</button> 
+          <!--button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mapModal" data-source="ret-going-from">Map</button--> 
         </div>
       </div>
+
+      <?php include('mapViews/ret-going-from-mapview.php');?>
+
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going to</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="ret-going-to" name="ret-going-to" placeholder="destination" required/> 
+          <input type="text" class="form-control" id="ret-going-to" name="ret-going-to" placeholder="destination" onclick="ret_going_to_showMap(this);" required/> 
           <input type="hidden" name="ret-going-to-lat" id="ret-going-to-lat" value=0>
           <input type="hidden" name="ret-going-to-long" id="ret-going-to-long" value=0>
           <!-- Button trigger modal -->
-          <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mapModal" data-source="ret-going-to">Map</button>                 
+          <!--button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mapModal" data-source="ret-going-to">Map</button-->
         </div>
       </div>
+
+      <?php include('mapViews/ret-going-to-mapview.php');?>
+
       <div class="form-group">
         <label  class="col-sm-4 control-label">I start return journey at</label>
         <div class="col-sm-2">
@@ -64,7 +70,7 @@
 
      <div id="ret-bus-1"> <!--out-bus-1, out-bus-route-1, out-bus-route-1-alt-->
         <div class="form-group col-sm-8 ret-bus-route-1">
-          <label class="col-sm-6 control-label">Bus route # (FirstAberdeen)</label>
+          <label class="col-sm-6 control-label">Bus route num. (FirstAberdeen)</label>
           <div class="col-sm-4">
             <select class="form-control" id="ret-bus-route-1" name="ret-bus-route-1">
               <option value="1">1</option>
@@ -106,24 +112,30 @@
         <div class="form-group">
           <label  class="col-sm-4 control-label">Where do you get off from the first bus?</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="ret-bus-2-from" name="ret-bus-2-from" placeholder="origin" required/> 
+            <input type="text" class="form-control" id="ret-bus-2-from" name="ret-bus-2-from" placeholder="origin" onclick="ret_bus_2_from_showMap(this);" required/> 
           <input type="hidden" name="ret-bus-2-from-lat" id="ret-bus-2-from-lat" value=0>  
           <input type="hidden" name="ret-bus-2-from-long" id="ret-bus-2-from-long" value=0>                            
-          <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mapModal" data-source="ret-bus-2-from">Map</button>
+          <!--button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mapModal" data-source="ret-bus-2-from">Map</button-->
           </div>
         </div>
+        
+        <?php include('mapViews/ret-bus-2-from-mapview.php');?>
+
         <div class="form-group">
           <label  class="col-sm-4 control-label">From where do you take the next bus?</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="ret-bus-2-to" name="ret-bus-2-to" placeholder="destination" required/>
+            <input type="text" class="form-control" id="ret-bus-2-to" name="ret-bus-2-to" placeholder="destination" onclick="ret_bus_2_to_showMap(this);" required/>
           <input type="hidden" name="ret-bus-2-to-lat" id="ret-bus-2-to-lat" value=0>  
           <input type="hidden" name="ret-bus-2-to-long" id="ret-bus-2-to-long" value=0>                            
-          <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mapModal" data-source="ret-bus-2-to">Map</button>               
+          <!--button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mapModal" data-source="ret-bus-2-to">Map</button-->
           </div>
         </div>
 
+        <?php include('mapViews/ret-bus-2-to-mapview.php');?>
+
+
         <div class="form-group col-sm-8 ret-bus-route-2">
-          <label class="col-sm-6 control-label">Bus route # (FirstAberdeen)</label>
+          <label class="col-sm-6 control-label">Bus route num. (FirstAberdeen)</label>
           <div class="col-sm-4">
             <select class="form-control" id="ret-bus-route-2" name="ret-bus-route-2">
               <option value="1">1</option>
