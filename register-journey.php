@@ -100,7 +100,7 @@
         <label  class="col-sm-4 control-label">I want to start receiving updates</label>
          <div class="col-sm-6">
             <select class="form-control" id="out-alert-time" name="out-alert-time">
-              <option value=0 >From start of the journey</option>
+              <option value=0 >From start of journey</option>
               <option value=10 >10 minutes earlier</option>
               <option value=20 >20 minutes earlier</option>
               <option value=30 >30 minutes earlier</option>                        
@@ -136,7 +136,7 @@
 
       <div id="out-bus-1"> <!--out-bus-1, out-bus-route-1, out-bus-route-1-alt-->
         <div class="form-group col-sm-8 out-bus-route-1" >
-          <label class="col-sm-6 control-label">Bus route num. (FirstAberdeen)</label>
+          <label class="col-sm-6 control-label">Bus route no. (FirstAberdeen)</label>
           <div class="col-sm-4">
             <select class="form-control" id="out-bus-route-1" name="out-bus-route-1">
               <option value="1">1</option>
@@ -200,7 +200,7 @@
         <?php include('mapViews/out-bus-2-to-mapview.php');?>
 
         <div class="form-group col-sm-8">
-          <label class="col-sm-6 control-label">Bus route num. (FirstAberdeen)</label>
+          <label class="col-sm-6 control-label">Bus route no. (FirstAberdeen)</label>
           <div class="col-sm-4">
             <select class="form-control" id="out-bus-route-2" name="out-bus-route-2">
               <option value="1">1</option>
@@ -407,11 +407,17 @@ $('#ret-arrive-time').datetimepicker({
       var alert_time = $('#out-alert-time').val();
       var no_of_buses = $('#out-no-of-buses').val();;
 
+      /*var going_from_lat = $('#going-from-lat').val();
+      var going_from_long = $('#going-from-long').val();
+      var going_to_lat = $('#going-to-lat').val();
+      var going_to_long = $('#going-to-long').val();*/
+
       //alert(alert_time);
       $('#ret-bus-1').hide(); 
       $('#ret-bus-2').hide(); 
       $('#ret-going-from').val(going_to);
       $('#ret-going-to').val(going_from);
+
       $('#ret-alert-time').val(alert_time);
       $('#ret-no-of-buses').val(no_of_buses);
 

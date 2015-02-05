@@ -46,7 +46,7 @@
         <label  class="col-sm-4 control-label">I want to start receiving updates</label>
          <div class="col-sm-6">
             <select class="form-control" id="ret-alert-time" name="ret-alert-time">
-              <option value="0" >From start of the journey</option>
+              <option value="0" >From start of journey</option>
               <option value="10" >10 minutes earlier</option>
               <option value="20" >20 minutes earlier</option>
               <option value="30" >30 minutes earlier</option>                        
@@ -70,7 +70,7 @@
 
      <div id="ret-bus-1"> <!--out-bus-1, out-bus-route-1, out-bus-route-1-alt-->
         <div class="form-group col-sm-8 ret-bus-route-1">
-          <label class="col-sm-6 control-label">Bus route num. (FirstAberdeen)</label>
+          <label class="col-sm-6 control-label">Bus route no. (FirstAberdeen)</label>
           <div class="col-sm-4">
             <select class="form-control" id="ret-bus-route-1" name="ret-bus-route-1">
               <option value="1">1</option>
@@ -135,7 +135,7 @@
 
 
         <div class="form-group col-sm-8 ret-bus-route-2">
-          <label class="col-sm-6 control-label">Bus route num. (FirstAberdeen)</label>
+          <label class="col-sm-6 control-label">Bus route no. (FirstAberdeen)</label>
           <div class="col-sm-4">
             <select class="form-control" id="ret-bus-route-2" name="ret-bus-route-2">
               <option value="1">1</option>

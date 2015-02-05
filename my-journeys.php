@@ -39,68 +39,50 @@ foreach ($journey_ids as $key => $value) {
   <!-- /.col-lg-12 -->
 </div>
 
+<div class="row">
 
-<div class="row col-xs-12 col-sm-12 col-lg-12 col-md-12">
+           <?php foreach ($journeys as $key => $journey)
+           {
+              //get stage ids
+                $result = db_fetch('SELECT array_to_json(stages) FROM journey WHERE id='.$journey['id']);
+                $row = pg_fetch_array($result);
+                $stages_ids = json_decode($row[0]);
+
+                $stages = array();
+
+                //get each stage data
+                foreach ($stages_ids as $sid) {
+                  $result = db_fetch('SELECT * FROM journey_stage WHERE id='.$sid);
+                  $row = pg_fetch_array($result);
+
+                  $result = db_fetch('SELECT array_to_json(bus_routes) FROM journey_stage WHERE id='.$sid);
+                  $r_row = pg_fetch_array($result);
+                  $bus_routes = json_decode($r_row[0]);
+                  
+                  $row['bus_routes']=$bus_routes;
+                  $stages[]=$row;
+
+                  # code...
+                }
+
+                switch (count($stages)) {
+                  case 1:
+                    include('journey-cards/single-journey-card.php');
+                    break;
+                  case 2:
+                    include('journey-cards/multi-journey-card.php');
+                    break;
+                  default:
+                    # code...
+                    break;
+                }
+           }
+           ?>
+
+</div>
 
 
-      <div class="table-responsive">
-        <table class="table table-striped footable" data-page-size="10">
-          <thead>
-            <tr>
-              <th data-toggle="tooltip" data-placement="bottom" class="matrisHeader" data-container="body">No:</th>
-              <th data-toggle="tooltip" data-placement="bottom" class="matrisHeader" data-container="body">Name</th>
-              <th data-toggle="tooltip" data-placement="bottom" class="matrisHeader" data-container="body">Going from</th>
-              <th data-toggle="tooltip" data-placement="bottom" class="matrisHeader" data-container="body">Going to</th>
-              <th data-toggle="tooltip" data-placement="bottom" class="matrisHeader" data-container="body">Days</th>
-              <th data-toggle="tooltip" data-placement="bottom" class="matrisHeader" data-container="body">Leave at</th>
-              <th data-toggle="tooltip" data-placement="bottom" class="matrisHeader" data-container="body">Arrive by</th>
-              <th data-toggle="tooltip" data-placement="bottom" class="matrisHeader" data-container="body" colspan="4">Options</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-            if ($size < 1) { echo "<tr > <td colspan=\"7\">No journeys in the database</td></tr>"; }
-            $index = 1;
-            foreach ($journeys as $key => $value) {
-              echo "<tr>";
-              echo "<td data-container='body' data-toggle='tooltip' data-placement='bottom' style='text-align: center;'>".$index."</td>";
-              
-              echo "<td data-container='body' data-toggle='tooltip' data-placement='bottom' style='text-align: center;'>".$value['name']."</a></td>";
-              
-              $origin_master = substr($value['origin_master'],0,6).'...';
-              $destination_master = substr($value['destination_master'],0,6).'...';
-              $days_travelling = substr(implode (',',$value['days_travelling']),0,6).'...';
 
-              echo "<td data-original-title='".$value['origin_master']."'data-toggle='tooltip' data-container='body' data-placement='bottom' style='text-align: center;'>".$origin_master."</td>";
-
-              echo "<td data-original-title='".$value['destination_master']."' data-toggle='tooltip' data-container='body' data-placement='bottom' style='text-align: center;'>".$destination_master."</td>";
-
-              echo "<td data-original-title='".implode (', ',$value['days_travelling'])."' data-toggle='tooltip' data-container='body' data-placement='bottom' style='text-align: center;'>".$days_travelling."</td>";
-
-              echo "<td data-container='body' data-toggle='tooltip' data-placement='bottom' style='text-align: center;'>".sprintf('%02d', $value['time_of_departure']/100).":".sprintf('%02d', $value['time_of_departure']%100)."</td>";//date('H:i',$value['time_of_departure'])."</td>";
-
-              echo "<td data-container='body' data-toggle='tooltip' data-placement='bottom' style='text-align: center;'>".sprintf('%02d', $value['time_of_arrival']/100).":".sprintf('%02d', $value['time_of_arrival']%100)."</td>";//date('H:i',$value['time_of_arrival'])."</td>";
-
-              echo "<td data-container='body' data-toggle='tooltip' data-placement='bottom' style='text-align: center;'><a href=\"view-journey.php?jid=".$value['id']."\" class=\"btn btn-default btn-sm active\" role=\"button\">Journey details</a></td>";
-
-              echo "<td data-container='body' data-toggle='tooltip' data-placement='bottom' style='text-align: center;'><a href=\"#\" onClick='deleteBtnClicked(this);' data-name=\"".$value['name']."\" data-id=\"".$value['id']."\" data-returnid=\"".$value['return']."\" class=\"btn btn-danger btn-sm active\" role=\"button\" data-toggle=\"modal\" data-target=\"#confirm-delete\" >Delete journey</a></td>";
-
-              echo "</tr>";
-              $index++;
-            }
-            ?>
-          </tbody>
-          <tfoot>
-              <tr>
-                <td colspan="7">
-                  <div class="pagination pagination-centered hide-if-no-paging"></div>
-                </td>
-              </tr>
-          </tfoot>
-        </table>
-      </div><!--End of table-responsive-->
-
-</div> <!--<div class="row col-xs-12 col-sm-12 col-lg-10 col-md-12"-->
 <?php include('footer.php');?>
 <script type="text/javascript">
 function deleteBtnClicked(event){
