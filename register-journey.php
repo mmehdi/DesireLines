@@ -407,16 +407,21 @@ $('#ret-arrive-time').datetimepicker({
       var alert_time = $('#out-alert-time').val();
       var no_of_buses = $('#out-no-of-buses').val();;
 
-      /*var going_from_lat = $('#going-from-lat').val();
+      var going_from_lat = $('#going-from-lat').val();
       var going_from_long = $('#going-from-long').val();
       var going_to_lat = $('#going-to-lat').val();
-      var going_to_long = $('#going-to-long').val();*/
+      var going_to_long = $('#going-to-long').val();
 
       //alert(alert_time);
       $('#ret-bus-1').hide(); 
       $('#ret-bus-2').hide(); 
       $('#ret-going-from').val(going_to);
       $('#ret-going-to').val(going_from);
+
+      $('#ret-going-from-lat').val(going_to_lat);
+      $('#ret-going-from-long').val(going_to_long);
+      $('#ret-going-to-lat').val(going_from_lat);
+      $('#ret-going-to-long').val(going_from_long);
 
       $('#ret-alert-time').val(alert_time);
       $('#ret-no-of-buses').val(no_of_buses);
@@ -434,6 +439,18 @@ $('#ret-arrive-time').datetimepicker({
 
         $('#ret-bus-1').show(); 
         $('#ret-bus-2').show(); 
+
+        var out_bus_2_from_lat = $('#out-bus-2-from-lat').val();
+        var out_bus_2_from_long = $('#out-bus-2-from-long').val();
+        var out_bus_2_to_lat = $('#out-bus-2-to-lat').val();
+        var out_bus_2_to_long = $('#out-bus-2-to-long').val();
+
+        $('#ret-bus-2-from-lat').val(out_bus_2_to_lat);
+        $('#ret-bus-2-from-long').val(out_bus_2_to_long);
+        $('#ret-bus-2-to-lat').val(out_bus_2_from_lat);
+        $('#ret-bus-2-to-long').val(out_bus_2_from_long);
+
+
         var bus_route_1 = $('#out-bus-route-1').val();
         var bus_route_2 = $('#out-bus-route-2').val();
         $('#ret-bus-route-2').val(bus_route_1);

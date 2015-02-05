@@ -229,8 +229,8 @@
                 google.maps.event.trigger(ret_going_from_map, 'resize');
                 //ret_going_from_map.setCenter(new google.maps.LatLng(57.147493, -2.095392));
 
-              if($('#ret-going-from-map-lat').val().length)
-                    ret_going_from_map.setCenter(new google.maps.LatLng($('#ret-going-from-map-lat').val(), $('#ret-going-from-map-long').val()));
+              if($('#ret-going-from-lat').val().length)
+                    ret_going_from_map.setCenter(new google.maps.LatLng($('#ret-going-from-lat').val(), $('#ret-going-from-long').val()));
                 else
                     ret_going_from_map.setCenter(new google.maps.LatLng(57.147493, -2.095392));
 

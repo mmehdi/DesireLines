@@ -41,8 +41,12 @@ foreach ($journey_ids as $key => $value) {
 
 <div class="row">
 
-           <?php foreach ($journeys as $key => $journey)
-           {
+           <?php 
+            if ($size == 0)
+              echo '<div class="alert alert-warning" role="alert">No journeys found in the database!.</div>';
+            else
+              foreach ($journeys as $key => $journey)
+            {
               //get stage ids
                 $result = db_fetch('SELECT array_to_json(stages) FROM journey WHERE id='.$journey['id']);
                 $row = pg_fetch_array($result);
