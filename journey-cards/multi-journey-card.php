@@ -85,8 +85,13 @@
           <?php $days=array(); 
             foreach($journey['days_travelling'] as $day)
               $days[] = strtoupper(substr($day, 0,3));
+
+            if($journey['alert_time']==0)
+              $journey['alert_time']='From start of journey.';
+            else
+              $journey['alert_time']=$journey['alert_time'].' minutes before journey.';
             ?>
-                  <div id="bdesc-txt"><br/><p><p><strong>Days: </strong><?php echo implode (', ',$days);?></p><strong>Send alerts: </strong><?php echo $journey['alert_time']?> minutes before journey.</p></div>
+                  <div id="bdesc-txt"><br/><p><p><strong>Days: </strong><?php echo implode (', ',$days);?></p><strong>Send alerts: </strong><?php echo $journey['alert_time'];?></p></div>
         </div><!--collapse-->
     </div> <!--panel body-->
   </div>

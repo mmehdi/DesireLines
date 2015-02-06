@@ -50,7 +50,7 @@
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going from</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="going-from" name="going-from" placeholder="origin" onclick="going_from_showMap(this);" required>
+          <input type="text" class="form-control" id="going-from" name="going-from" placeholder="bus stop" onclick="going_from_showMap(this);" required>
           <input type="hidden" name="going-from-lat" id="going-from-lat" value=0>
           <input type="hidden" name="going-from-long" id="going-from-long" value=0>
           <!-- Button trigger modal -->
@@ -63,7 +63,7 @@
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going to</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" id="going-to" name="going-to" placeholder="destination" onclick="going_to_showMap(this);" required>  
+          <input type="text" class="form-control" id="going-to" name="going-to" placeholder="bus stop" onclick="going_to_showMap(this);" required>  
           <input type="hidden" name="going-to-lat" id="going-to-lat" value=0>  
           <input type="hidden" name="going-to-long" id="going-to-long" value=0>                         
           <!--button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mapModal" data-source="going-to">Map</button-->
@@ -135,9 +135,12 @@
       </div>
 
       <div id="out-bus-1"> <!--out-bus-1, out-bus-route-1, out-bus-route-1-alt-->
-        <div class="form-group col-sm-8 out-bus-route-1" >
-          <label class="col-sm-6 control-label">Bus route no. (FirstAberdeen)</label>
-          <div class="col-sm-4">
+        <p class="col-lg-offset-0 stage1" style="font-size:19px; font-weight:bold;">Stage1 </p>
+          <fieldset style="margin-bottom:5px; margin-left:0px; padding-left:0px;" class="stage1-fieldset">
+
+        <div class="form-group out-bus-route-1" >
+          <label class="col-sm-4 control-label">Bus route no. (FirstAberdeen)</label>
+          <div class="col-sm-3">
             <select class="form-control" id="out-bus-route-1" name="out-bus-route-1">
               <option value="1">1</option>
               <option value="2">2</option>
@@ -171,14 +174,12 @@
             <button type="button" class="btn btn-xs btn-primary" id="add-alternate-bus" style="margin-bottom: 5px;" data-name="out-bus-route-1-alt" onClick="add_alt_button_click(this);">Add Alternative Bus</button>
           </div>
         </div>
-      </div>
 
 
-      <div id="out-bus-2">
-        <div class="form-group">
+        <div class="form-group stage1">
           <label  class="col-sm-4 control-label">Where do you get off from the first bus?</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="out-bus-2-from" name="out-bus-2-from" placeholder="origin"  onclick="out_bus_2_from_showMap(this);" required> 
+            <input type="text" class="form-control" id="out-bus-2-from" name="out-bus-2-from" placeholder="bus stop"  onclick="out_bus_2_from_showMap(this);" required> 
             <input type="hidden" name="out-bus-2-from-lat" id="out-bus-2-from-lat" value=0>  
           <input type="hidden" name="out-bus-2-from-long" id="out-bus-2-from-long" value=0>                            
           <!--button type="button" class="btn btn-primary btn-xs" data-placement="top" data-toggle="modal" data-target="#mapModal" data-source="out-bus-2-from">Map</button-->
@@ -186,11 +187,19 @@
         </div>
         
         <?php include('mapViews/out-bus-2-from-mapview.php');?>
+        
+        </fieldset>
+      </div>
+
+      <div id="out-bus-2">
+          <p class="col-lg-offset-0" style="font-size:19px; font-weight:bold;">Stage2 </p>
+
+          <fieldset style="margin-left:0px; padding-left:0px;">
 
         <div class="form-group">
           <label  class="col-sm-4 control-label">From where do you take the next bus?</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="out-bus-2-to" name="out-bus-2-to" placeholder="destination" onclick="out_bus_2_to_showMap(this);" required>  
+            <input type="text" class="form-control" id="out-bus-2-to" name="out-bus-2-to" placeholder="bus stop" onclick="out_bus_2_to_showMap(this);" required>  
             <input type="hidden" name="out-bus-2-to-lat" id="out-bus-2-to-lat" value=0>  
           <input type="hidden" name="out-bus-2-to-long" id="out-bus-2-to-long" value=0>                            
           <!--button type="button" class="btn btn-primary btn-xs" data-toggle="modal" data-target="#mapModal" data-source="out-bus-2-to">Map</button-->               
@@ -199,9 +208,9 @@
 
         <?php include('mapViews/out-bus-2-to-mapview.php');?>
 
-        <div class="form-group col-sm-8">
-          <label class="col-sm-6 control-label">Bus route no. (FirstAberdeen)</label>
-          <div class="col-sm-4">
+        <div class="form-group">
+          <label class="col-sm-4 control-label">Bus route no. (FirstAberdeen)</label>
+          <div class="col-sm-3">
             <select class="form-control" id="out-bus-route-2" name="out-bus-route-2">
               <option value="1">1</option>
               <option value="2">2</option>
@@ -236,7 +245,7 @@
           </div>
         </div>
       </div>
-
+    </fieldset>
       <div class="form-group">
         <label  class="col-sm-4 control-label">Is there a return journey?</label>
         <div class="col-sm-8">
@@ -370,9 +379,13 @@ $('#ret-arrive-time').datetimepicker({
     $('#out-no-of-buses').change(function(){
 
         if($('#out-no-of-buses').val() == 1) {
+            $('.stage1').hide();
+            $('.stage1-fieldset').css('border','0px');
             $('#out-bus-1').fadeIn('slow');
             $('#out-bus-2').fadeOut('slow');
         } else if($('#out-no-of-buses').val() == 2) {
+            $('.stage1').show();
+            $('.stage1-fieldset').css('border','1px solid #c0c0c0');
             $('#out-bus-1').fadeIn('slow');
             $('#out-bus-2').fadeIn('slow');
         } 
@@ -381,9 +394,13 @@ $('#ret-arrive-time').datetimepicker({
     $('#ret-no-of-buses').change(function(){
 
         if($('#ret-no-of-buses').val() == 1) {
+            $('.ret-stage1').hide();
+            $('.ret-stage1-fieldset').css('border','0px');
             $('#ret-bus-1').fadeIn('slow');
             $('#ret-bus-2').fadeOut('slow');
         } else if($('#ret-no-of-buses').val() == 2) {
+            $('.ret-stage1').show();
+            $('.ret-stage1-fieldset').css('border','1px solid #c0c0c0');
             $('#ret-bus-1').fadeIn('slow');
             $('#ret-bus-2').fadeIn('slow');
         } 
