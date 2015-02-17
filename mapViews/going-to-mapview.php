@@ -1,4 +1,4 @@
-<div class="form-group going-to-map" style="display:none;">
+<div class="form-group going-to-map" style="display:none;"  tabindex='1'>
     <div class="panel panel-default col-md-offset-4 col-md-6">
         <div id="going-to-map" class="panel-collapse collapse">
             <div class="panel-body">
@@ -59,6 +59,7 @@
         font-size: 15px;
         font-weight: 300;
         text-overflow: ellipsis;
+        border: 1px solid grey;
       }
 
       #going-to-map-pac-input:focus {
@@ -233,6 +234,8 @@
                 else
                     going_to_map.setCenter(new google.maps.LatLng(57.147493, -2.095392));
 
+
+                $("#going-to-div").focus();
            });
 
         //store map values in the form
@@ -248,6 +251,8 @@
        //hide the div when collaspe is hidden
        $('#going-to-map').on('hidden.bs.collapse', function (e) {
             $('.going-to-map').hide();
+
+            $("#going-to-div").focus();
         });
        
        function going_to_map_close(){
@@ -257,7 +262,7 @@
 
         function going_to_showMap(input){
       $('.going-to-map').show();
-      $("#going-to-map").collapse('show')
+      $("#going-to-map").collapse('show');
       //alert('click');
     //  if($(input).val()=='')
        //   $('#mapModal').modal('show');

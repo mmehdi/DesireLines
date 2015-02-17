@@ -5,7 +5,7 @@
     <!--form class="form-horizontal" method="post" role="form" id="return-journey-form" class="myForms" action=""-->
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going from</label>
-        <div class="col-sm-6">
+        <div class="col-sm-6" id="ret-going-from-div" tabindex='1'>
           <input type="text" class="form-control" id="ret-going-from" name="ret-going-from" placeholder="bus stop" onclick="ret_going_from_showMap(this);" required/> 
           <input type="hidden" name="ret-going-from-lat" id="ret-going-from-lat" value=0>
           <input type="hidden" name="ret-going-from-long" id="ret-going-from-long" value=0>
@@ -18,7 +18,7 @@
 
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going to</label>
-        <div class="col-sm-6">
+        <div class="col-sm-6" id="ret-going-to-div" tabindex='1'>
           <input type="text" class="form-control" id="ret-going-to" name="ret-going-to" placeholder="bus stop" onclick="ret_going_to_showMap(this);" required/> 
           <input type="hidden" name="ret-going-to-lat" id="ret-going-to-lat" value=0>
           <input type="hidden" name="ret-going-to-long" id="ret-going-to-long" value=0>
@@ -111,7 +111,7 @@
 
         <div class="form-group ret-stage1" style="display:none;">
           <label  class="col-sm-4 control-label">Where do you get off from the first bus?</label>
-          <div class="col-sm-6">
+          <div class="col-sm-6" id="ret-bus-2-from-div" tabindex='1'>
             <input type="text" class="form-control" id="ret-bus-2-from" name="ret-bus-2-from" placeholder="bus stop" onclick="ret_bus_2_from_showMap(this);" required/> 
           <input type="hidden" name="ret-bus-2-from-lat" id="ret-bus-2-from-lat" value=0>  
           <input type="hidden" name="ret-bus-2-from-long" id="ret-bus-2-from-long" value=0>                            
@@ -132,7 +132,7 @@
 
         <div class="form-group">
           <label  class="col-sm-4 control-label">From where do you take the next bus?</label>
-          <div class="col-sm-6">
+          <div class="col-sm-6" id="ret-bus-2-to-div" tabindex='1'>>
             <input type="text" class="form-control" id="ret-bus-2-to" name="ret-bus-2-to" placeholder="bus stop" onclick="ret_bus_2_to_showMap(this);" required/>
           <input type="hidden" name="ret-bus-2-to-lat" id="ret-bus-2-to-lat" value=0>  
           <input type="hidden" name="ret-bus-2-to-long" id="ret-bus-2-to-long" value=0>                            

@@ -59,6 +59,7 @@
         font-size: 15px;
         font-weight: 300;
         text-overflow: ellipsis;
+        border: 1px solid grey;
       }
 
       #ret-going-to-map-pac-input:focus {
@@ -233,6 +234,9 @@
                 else
                     ret_going_to_map.setCenter(new google.maps.LatLng(57.147493, -2.095392));
 
+                
+                $("#ret-going-to-div").focus();
+
            });
 
         //store map values in the form
@@ -248,6 +252,7 @@
        //hide the div when collaspe is hidden
        $('#ret-going-to-map').on('hidden.bs.collapse', function (e) {
             $('.ret-going-to-map').hide();
+            $("#ret-going-to-div").focus();
         });
        
        function ret_going_to_map_close(){

@@ -59,6 +59,7 @@
         font-size: 15px;
         font-weight: 300;
         text-overflow: ellipsis;
+        border: 1px solid grey;
       }
 
       #out-bus-2-to-map-pac-input:focus {
@@ -234,6 +235,8 @@
              else
                 out_bus_2_to_map.setCenter(new google.maps.LatLng(57.147493, -2.095392));
 
+            $("#out-bus-2-to-div").focus();
+
 
            });
 
@@ -250,6 +253,7 @@
        //hide the div when collaspe is hidden
        $('#out-bus-2-to-map').on('hidden.bs.collapse', function (e) {
             $('.out-bus-2-to-map').hide();
+            $("#out-bus-2-to-div").focus();
         });
        
        function out_bus_2_to_map_close(){

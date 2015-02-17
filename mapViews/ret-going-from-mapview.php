@@ -59,6 +59,7 @@
         font-size: 15px;
         font-weight: 300;
         text-overflow: ellipsis;
+        border: 1px solid grey;
       }
 
       #ret-going-from-map-pac-input:focus {
@@ -233,6 +234,8 @@
                     ret_going_from_map.setCenter(new google.maps.LatLng($('#ret-going-from-lat').val(), $('#ret-going-from-long').val()));
                 else
                     ret_going_from_map.setCenter(new google.maps.LatLng(57.147493, -2.095392));
+                
+            $("#ret-going-from-div").focus();
 
            });
 
@@ -249,6 +252,7 @@
        //hide the div when collaspe is hidden
        $('#ret-going-from-map').on('hidden.bs.collapse', function (e) {
             $('.ret-going-from-map').hide();
+            $("#ret-going-from-div").focus();
         });
        
        function ret_going_from_map_close(){

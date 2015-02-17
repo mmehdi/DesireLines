@@ -1,9 +1,8 @@
 <div class="form-group going-from-map" style="display:none;">
     <div class="panel panel-default col-md-offset-4 col-md-6">
         <div id="going-from-map" class="panel-collapse collapse">
-            <div class="panel-body">
+            <div class="panel-body" style="padding:1px;">
                 <p>Please enter the address of your location into the search box and drag the marker to the correct bus stop.</p>
-                <div class="panel-group" id="">
                     <input id="going-from-map-pac-input" class="controls" type="text" placeholder="Search Box">
                     <div id="going-from-map-mapCanvas" class="col-lg-8 col-md-8"></div>
                     <div id="going-from-map-infoPanel">
@@ -16,7 +15,6 @@
                         <input type="hidden" name="going-from-map-lat" id="going-from-map-lat" value=0>
                         <input type="hidden" name="going-from-map-lat" id="going-from-map-long" value=0>
                     </div>
-                </div>
             </div>
             <div class="panel-footer">
                 <button type="button" class="btn btn-default" onClick="going_from_map_close();">Close</button>
@@ -59,6 +57,7 @@
         font-size: 15px;
         font-weight: 300;
         text-overflow: ellipsis;
+        border: 1px solid grey;
       }
 
       #going-from-map-pac-input:focus {
@@ -234,6 +233,9 @@
                 else
                     going_from_map.setCenter(new google.maps.LatLng(57.147493, -2.095392));
 
+
+            $("#going-from-div").focus();
+
            });
 
         //store map values in the form
@@ -249,6 +251,7 @@
        //hide the div when collaspe is hidden
        $('#going-from-map').on('hidden.bs.collapse', function (e) {
             $('.going-from-map').hide();
+            $("#going-from-div").focus();
         });
        
        function going_from_map_close(){
@@ -258,7 +261,7 @@
 
         function going_from_showMap(input){
       $('.going-from-map').show();
-      $("#going-from-map").collapse('show')
+      $("#going-from-map").collapse('show');
       //alert('click');
     //  if($(input).val()=='')
        //   $('#mapModal').modal('show');

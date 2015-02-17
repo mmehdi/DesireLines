@@ -25,7 +25,7 @@
   </div>
 
 
-<div class="row col-xs-12 col-sm-12 col-lg-12 col-md-12">
+<div class="row">
 
 <div class="alert alert-success" role="alert">Welcome <?php echo '<strong>'.$_SESSION['request_vars']['screen_name'].'!</strong>';?></div>
 
@@ -49,7 +49,7 @@
       </div>
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going from</label>
-        <div class="col-sm-6">
+        <div class="col-sm-6" id="going-from-div" tabindex='1'>
           <input type="text" class="form-control" id="going-from" name="going-from" placeholder="bus stop" onclick="going_from_showMap(this);" required>
           <input type="hidden" name="going-from-lat" id="going-from-lat" value=0>
           <input type="hidden" name="going-from-long" id="going-from-long" value=0>
@@ -62,7 +62,7 @@
 
       <div class="form-group">
         <label  class="col-sm-4 control-label">I'm going to</label>
-        <div class="col-sm-6">
+        <div class="col-sm-6" id="going-to-div" tabindex='1'>
           <input type="text" class="form-control" id="going-to" name="going-to" placeholder="bus stop" onclick="going_to_showMap(this);" required>  
           <input type="hidden" name="going-to-lat" id="going-to-lat" value=0>  
           <input type="hidden" name="going-to-long" id="going-to-long" value=0>                         
@@ -178,7 +178,7 @@
 
         <div class="form-group stage1">
           <label  class="col-sm-4 control-label">Where do you get off from the first bus?</label>
-          <div class="col-sm-6">
+          <div class="col-sm-6" id="out-bus-2-from-div" tabindex='1'>
             <input type="text" class="form-control" id="out-bus-2-from" name="out-bus-2-from" placeholder="bus stop"  onclick="out_bus_2_from_showMap(this);" required> 
             <input type="hidden" name="out-bus-2-from-lat" id="out-bus-2-from-lat" value=0>  
           <input type="hidden" name="out-bus-2-from-long" id="out-bus-2-from-long" value=0>                            
@@ -198,7 +198,7 @@
 
         <div class="form-group">
           <label  class="col-sm-4 control-label">From where do you take the next bus?</label>
-          <div class="col-sm-6">
+          <div class="col-sm-6" id="out-bus-2-to-div" tabindex='1'>
             <input type="text" class="form-control" id="out-bus-2-to" name="out-bus-2-to" placeholder="bus stop" onclick="out_bus_2_to_showMap(this);" required>  
             <input type="hidden" name="out-bus-2-to-lat" id="out-bus-2-to-lat" value=0>  
           <input type="hidden" name="out-bus-2-to-long" id="out-bus-2-to-long" value=0>                            
@@ -275,23 +275,35 @@
 
 <script type="text/javascript">
 
+var is_arrive_time = false;
+var is_ret_arrive_time = false;
+
 $('#leave-time').datetimepicker({
   pickDate: false,
-  stepMinute: 05
+  stepMinute: 05,
 });
 
 
 $('#arrive-time').datetimepicker({
   pickDate: false,
   stepMinute: 05,
-  defaultDate: ""
+  /*onSelect: function(dateText, inst) { 
+      var time = $(this).datetimepicker( 'getDate' ); //the getDate method
+        alert(time);
+    
+   }*/
 });
 
 //$("#leave-time").on("dp.change",function (e) {
 $("#arrive-time").on("dp.show",function (e) {
- // alert($("#arrive-time").val());
-  if($('#arrive-time').val().length===0)
-    $('#arrive-time').data("DateTimePicker").setDate($('#leave-time').val());
+
+  var arrive_time = $("#arrive-time").data("DateTimePicker").getDate();
+
+  //var arrive_time = $("#arrive-time").find("input").val();
+    if(!is_arrive_time) //the getDate method
+      $('#arrive-time').data("DateTimePicker").setDate($('#leave-time').val());
+
+    is_arrive_time = true;  
 });
 
 
@@ -304,6 +316,18 @@ $('#ret-arrive-time').datetimepicker({
   pickDate: false,
   stepMinute: 05
 });
+
+$("#ret-arrive-time").on("dp.show",function (e) {
+
+  var ret_arrive_time = $("#ret-arrive-time").data("DateTimePicker").getDate();
+
+  //var arrive_time = $("#arrive-time").find("input").val();
+    if(!is_ret_arrive_time) //the getDate method
+      $('#ret-arrive-time').data("DateTimePicker").setDate($('#ret-leave-time').val());
+
+    is_ret_arrive_time = true;  
+});
+
 
 /*$("#leave-time").datetimepicker({
 

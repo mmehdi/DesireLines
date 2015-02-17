@@ -53,6 +53,7 @@
     <!-- Datepicker -->
     <script type="text/javascript" src="js/moment.min.js"> </script>
     <script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"> </script>
+    <script type="text/javascript" src="js/datepicker/js/bootstrap-datepicker.js"> </script>
 
     <!--bootbox-->
     <script type="text/javascript" src="js/bootbox.min.js"> </script>
