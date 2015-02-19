@@ -550,8 +550,23 @@ $("#ret-arrive-time").on("dp.show",function (e) {
             data: datastring,
             dataType: "json",
             success: function(response) {
-            alert('Your journey has been saved!');
-            window.location.replace(base_url+'/my-journeys.php');
+            //alert('Your journey has been saved!');
+
+              bootbox.dialog({
+                message: 'Your journey has been saved successfully.',
+                title: "Tweeting Travel",
+                buttons: {
+                  Ok: {
+                    label: "Ok",
+                    className: "btn-success",
+                    callback: function() {
+                      window.location.replace(base_url+'/my-journeys.php');      
+                    }    
+                  }
+                }
+              });
+
+            
          },
             error: function(response){
                   console.log(JSON.stringify(response));
