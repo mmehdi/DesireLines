@@ -134,8 +134,22 @@ function deleteJourney(journey_id, journey_name, return_journey_id){
             data: "jid="+journey_id+"&jname="+journey_name+"&return_id="+return_journey_id,
             dataType: "json",
             success: function(response) {
-            alert('successfully deleted!');
-            window.location.replace(base_url+'/my-journeys.php');
+            //alert('successfully deleted!');
+            //window.location.replace(base_url+'/my-journeys.php');
+            bootbox.dialog({
+                message: 'Your journey has been successfully deleted.',
+                title: "Tweeting Travel",
+                buttons: {
+                  Ok: {
+                    label: "Ok",
+                    className: "btn-success",
+                    callback: function() {
+                      window.location.replace(base_url+'/my-journeys.php');      
+                    }    
+                  }
+                }
+              });
+
          },
             error: function(response){
                   console.log(JSON.stringify(response));
